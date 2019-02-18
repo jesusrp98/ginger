@@ -16,7 +16,6 @@ class GingerApp extends StatelessWidget {
         fontFamily: 'ProductSans',
         primaryColor: primaryColor,
         accentColor: accentColor,
-        dividerColor: dividerColor,
       ),
       home: StartScreen(),
       debugShowCheckedModeBanner: false,

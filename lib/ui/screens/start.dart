@@ -6,10 +6,12 @@ import '../../models/home.dart';
 import '../../models/intelligent.dart';
 import '../../models/profile.dart';
 import '../../models/query.dart';
+import '../../models/search.dart';
 import '../tabs/cocktail.dart';
 import '../tabs/home.dart';
 import '../tabs/intelligent.dart';
 import '../tabs/profile.dart';
+import '../tabs/search.dart';
 
 class StartScreen extends StatefulWidget {
   @override
@@ -22,6 +24,7 @@ class _StartScreenState extends State<StartScreen> {
   static final List<QueryModel> _modelTab = [
     HomeModel(),
     IntelligentModel(),
+    SearchModel(),
     CocktailModel(),
     ProfileModel(),
   ];
@@ -35,12 +38,16 @@ class _StartScreenState extends State<StartScreen> {
       model: _modelTab[1],
       child: IntelligentTab(),
     ),
-    ScopedModel<CocktailModel>(
+    ScopedModel<SearchModel>(
       model: _modelTab[2],
+      child: SearchTab(),
+    ),
+    ScopedModel<CocktailModel>(
+      model: _modelTab[3],
       child: CocktailTab(),
     ),
     ScopedModel<ProfileModel>(
-      model: _modelTab[3],
+      model: _modelTab[4],
       child: ProfileTab(),
     ),
   ];
