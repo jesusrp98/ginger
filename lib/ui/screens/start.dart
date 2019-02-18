@@ -66,6 +66,7 @@ class _StartScreenState extends State<StartScreen> {
         type: BottomNavigationBarType.fixed,
         onTap: (index) => setState(() => _currentIndex = index),
         currentIndex: _currentIndex,
+        fixedColor: Theme.of(context).accentColor,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             title: const Text('Home'),
