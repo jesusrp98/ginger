@@ -61,8 +61,24 @@ class _StartScreenState extends State<StartScreen> {
         currentIndex: _currentIndex,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            title: Text(''),
+            title: const Text('Home'),
             icon: const Icon(Icons.home),
+          ),
+          BottomNavigationBarItem(
+            title: const Text('Intelligent'),
+            icon: const Icon(Icons.star),
+          ),
+          BottomNavigationBarItem(
+            title: const Text('Search'),
+            icon: const Icon(Icons.search),
+          ),
+          BottomNavigationBarItem(
+            title: const Text('Cocktails'),
+            icon: const Icon(Icons.local_bar),
+          ),
+          BottomNavigationBarItem(
+            title: const Text('Profile'),
+            icon: const Icon(Icons.person),
           ),
         ],
       ),
