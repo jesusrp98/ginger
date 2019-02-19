@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 
 import '../util/url.dart';
 import 'query.dart';
+import 'recipe.dart';
 
 class HomeModel extends QueryModel {
   @override
@@ -13,6 +14,11 @@ class HomeModel extends QueryModel {
 
     // For demo purposes
     print(snapshot);
+
+    items.addAll(snapshot['hits']
+        .map((recipe) => Recipe.fromJson(recipe['recipe']))
+        .toList());
+
     setLoading(false);
   }
 }
