@@ -13,5 +13,6 @@ class HomeModel extends QueryModel {
 
     // For demo purposes
     print(snapshot);
+    setLoading(false);
   }
 }
