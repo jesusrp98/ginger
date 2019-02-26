@@ -12,7 +12,24 @@ class CocktailTab extends StatelessWidget {
               title: const Text('Cocktails catalogue'),
               centerTitle: true,
             ),
-            body: Center(child: const Text('WORK IN PROGRESS')),
+            body: model.isLoading
+                ? Text('LOADING...')
+                : ListView.separated(
+                    itemCount: model.getItemCount,
+                    itemBuilder: (_, index) {
+                      final Cocktail cocktail = model.getItem(index);
+                      return ListTile(
+                        leading: SizedBox(
+                          height: 64,
+                          width: 64,
+                          child: Image.network(cocktail.photo),
+                        ),
+                        title: Text(cocktail.name),
+                        subtitle: Text(cocktail.glassType),
+                      );
+                    },
+                    separatorBuilder: (_, index) => Divider(),
+                  ),
           ),
     );
   }

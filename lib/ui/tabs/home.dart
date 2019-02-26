@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../models/home.dart';
+import '../../models/recipe.dart';
 import '../pages/recipe.dart';
 
 class HomeTab extends StatelessWidget {
@@ -18,16 +19,25 @@ class HomeTab extends StatelessWidget {
                 : ListView.separated(
                     itemCount: model.getItemCount,
                     separatorBuilder: (context, index) => Divider(),
-                    itemBuilder: (context, index) => ListTile(
-                          title: Text(model.getItem(index).name),
-                          onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => RecipePage(model.getItem(index)),
-                                ),
-                              ),
+                    itemBuilder: (context, index) {
+                      final Recipe recipe = model.getItem(index);
+                      return ListTile(
+                        leading: SizedBox(
+                          height: 64,
+                          width: 64,
+                          child: Image.network(recipe.photo),
                         ),
-                  ),
+                        title: Text(recipe.name),
+                        subtitle: Text(recipe.servs.toString()),
+                        onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) =>
+                                    RecipePage(recipe),
+                              ),
+                            ),
+                      );
+                    }),
           ),
     );
   }
