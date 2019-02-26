@@ -1,5 +1,5 @@
 class Recipe {
-  final String name, photo, url, shareUrl;
+  final String name, photo, url, shareUrl, source;
   final int servs;
   final List healths, ingredients, diets;
   final double calories, weight, time;
@@ -10,6 +10,7 @@ class Recipe {
     this.photo,
     this.url,
     this.shareUrl,
+    this.source,
     this.servs,
     this.diets,
     this.healths,
@@ -25,37 +26,23 @@ class Recipe {
 
   factory Recipe.fromJson(Map<String, dynamic> json) {
     return Recipe(
-        name: json['label'],
-        photo: json['image'],
-        url: json['url'],
-        shareUrl: json['shareAs'],
-        servs: json['yield'],
-        diets: json['dietLabel'],
-        healths: json['healthLabels'],
-        ingredients: json['ingredientLines'],
-        calories: json['calories'],
-        weight: json['totalWeight'],
-        time: json['totalTime'],
-        sugar: NutritionalValue(
-          label: json['SUGAR']['label'],
-          quantity: json['SUGAR']['quantity'],
-          unit: json['SUGAR']['unit'],
-        ),
-        fat: NutritionalValue(
-          label: json['FAT']['label'],
-          quantity: json['FAT']['quantity'],
-          unit: json['FAT']['unit'],
-        ),
-        cholesterol: NutritionalValue(
-          label: json['CHOLE']['label'],
-          quantity: json['CHOLE']['quantity'],
-          unit: json['CHOLE']['unit'],
-        ),
-        proteins: NutritionalValue(
-          label: json['PROCNT']['label'],
-          quantity: json['PROCNT']['quantity'],
-          unit: json['PROCNT']['unit'],
-        ));
+      name: json['label'],
+      photo: json['image'],
+      url: json['url'],
+      shareUrl: json['shareAs'],
+      source: json['source'],
+      servs: json['yield'],
+      diets: json['dietLabel'],
+      healths: json['healthLabels'],
+      ingredients: json['ingredientLines'],
+      calories: json['calories'],
+      weight: json['totalWeight'],
+      time: json['totalTime'],
+      sugar: NutritionalValue.fromJson(json['totalNutrients']['SUGAR']),
+      fat: NutritionalValue.fromJson(json['totalNutrients']['FAT']),
+      cholesterol: NutritionalValue.fromJson(json['totalNutrients']['CHOLE']),
+      proteins: NutritionalValue.fromJson(json['totalNutrients']['PROCNT']),
+    );
   }
 }
 

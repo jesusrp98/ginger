@@ -30,7 +30,7 @@ class Cocktail {
       name: json['strDrink'],
       category: json['strCategory'],
       tag: json['strIBA'],
-      isAlcoholic: true,
+      isAlcoholic: json['strAlcoholic'] == 'Alcoholic',
       glassType: json['strGlass'],
       instruction: json['strInstruction'],
       photo: json['strDrinkThumb'],
