@@ -1,8 +1,7 @@
 class Recipe {
   final String name, photo, url, shareUrl, source;
-  final int servs;
   final List healths, ingredients, diets;
-  final double calories, weight, time;
+  final double servs, calories, weight, time;
   final NutritionalValue sugar, fat, cholesterol, proteins;
 
   Recipe({
