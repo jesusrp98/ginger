@@ -35,7 +35,7 @@ class CardRecipe extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            RowItem.textRow(context, 'Calories', calorie.toStringAsFixed(3)),
+            RowItem.textRow(context, 'Calories', calorie.toStringAsFixed(3)+" kcal"),
             RowItem.textRow(context, 'Number of guests', serv.toString()),
             RowItem.textRow(context, 'Preparation time', time.toString()),
             //Veganos
