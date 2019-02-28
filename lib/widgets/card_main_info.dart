@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ginger/models/recipe.dart';
-import 'package:ginger/widgets/row_item.dart';
+
+import 'hero_image.dart';
+import 'separator.dart';
 
 class CardPhoto extends StatelessWidget {
   final String url;
@@ -18,16 +19,16 @@ class CardPhoto extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
       child: Padding(
         padding: const EdgeInsets.all(24.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: Row(
           children: <Widget>[
-            ListTile(
-              leading: SizedBox(
-                height: 64,
-                width: 64,
-                child: Image.network(url),
-              ),
-              title: Text(name),
+            HeroImage.card(url: url, tag: name),
+            Separator.spacer(width: 14, height: 0),
+            Text(
+              name,
+              style: Theme.of(context)
+                  .textTheme
+                  .title
+                  .copyWith(fontWeight: FontWeight.bold),
             ),
           ],
         ),
