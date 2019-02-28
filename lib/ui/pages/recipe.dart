@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ginger/widgets/card_information.dart';
-import 'package:ginger/widgets/card_main_info.dart';
-import 'package:ginger/widgets/card_page.dart';
-import 'package:ginger/widgets/row_item.dart';
 
 import '../../models/recipe.dart';
+import '../../widgets/card_main_info.dart';
+import '../../widgets/card_page.dart';
+import '../../widgets/row_item.dart';
+import '../../widgets/separator.dart';
 
 class RecipePage extends StatelessWidget {
   final Recipe _recipe;
@@ -15,7 +15,8 @@ class RecipePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(_recipe.name), centerTitle: true),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -23,16 +24,60 @@ class RecipePage extends StatelessWidget {
               url: _recipe.photo,
               name: _recipe.name,
             ),
-            CardRecipe(
-              calorie: _recipe.calories,
-              serv: _recipe.servs,
-              time: _recipe.time,
-              vegan: "",
-              vegetarian: "",
-              diet: _recipe.diets,
-              fat: _recipe.fat,
-              cholesterol: _recipe.cholesterol,
-              proteins: _recipe.proteins,
+            Separator.cardSpacer(),
+            CardPage(
+              title: 'NUTRITIONAL VALUES',
+              body: Column(
+                children: <Widget>[
+                  RowItem.textRow(
+                    context,
+                    'Calories',
+                    _recipe.calories.toStringAsFixed(3) + " kcal",
+                  ),
+                  Separator.spacer(),
+                  RowItem.textRow(
+                    context,
+                    'Number of guests',
+                    _recipe.servs.toString(),
+                  ),
+                  Separator.spacer(),
+                  RowItem.textRow(
+                    context,
+                    'Preparation time',
+                    _recipe.time.toString(),
+                  ),
+                  Separator.spacer(),
+                  RowItem.textRow(
+                    context,
+                    'Diet',
+                    _recipe.diets.toString(),
+                  ),
+                  Separator.spacer(),
+                  RowItem.textRow(
+                    context,
+                    'Fat',
+                    _recipe.fat.quantity.toStringAsFixed(3) +
+                        " " +
+                        _recipe.fat.unit.toString(),
+                  ),
+                  Separator.spacer(),
+                  RowItem.textRow(
+                    context,
+                    'Cholesterol',
+                    _recipe.cholesterol.quantity.toStringAsFixed(3) +
+                        " " +
+                        _recipe.cholesterol.unit.toString(),
+                  ),
+                  Separator.spacer(),
+                  RowItem.textRow(
+                    context,
+                    'Proteins',
+                    _recipe.proteins.quantity.toStringAsFixed(3) +
+                        " " +
+                        _recipe.proteins.unit.toString(),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
