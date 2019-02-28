@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ginger/widgets/card_page.dart';
+import 'package:ginger/widgets/row_item.dart';
 
 import '../../models/recipe.dart';
 
@@ -23,7 +25,9 @@ class RecipePage extends StatelessWidget {
                   .textTheme
                   .subtitle
                   .copyWith(color: Theme.of(context).textTheme.caption.color),
-            )
+            ),
+            RowItem.textRow(context, 'title', 'descr'),
+            CardPage(title: 'titñle', body: loquesea,),
           ],
         ),
       ),
