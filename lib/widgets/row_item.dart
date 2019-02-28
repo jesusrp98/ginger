@@ -81,7 +81,7 @@ class RowItem extends StatelessWidget {
       status == null
           ? Icons.remove_circle
           : (status ? Icons.check_circle : Icons.cancel),
-      color: status == null ? nullIcon : (status ? acceptIcon : denyIcon),
+      //color: status == null ? nullIcon : (status ? acceptIcon : denyIcon),
       size: 19.0,
     );
   }

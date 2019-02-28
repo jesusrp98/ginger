@@ -21,6 +21,7 @@ dependencies:
   package_info: ^0.4.0+1
   scoped_model: ^1.0.1
   share: ^0.6.0+1
+  flutter_i18n: ^0.5.2
 
 flutter:
   fonts:
