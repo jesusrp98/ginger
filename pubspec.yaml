@@ -4,7 +4,7 @@ description: Ginger es una aplicación destinada a ofrecer recetas, tanto de com
 version: 0.0.1+1
 
 environment:
-  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+  sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -21,7 +21,6 @@ dependencies:
   package_info: ^0.4.0+1
   scoped_model: ^1.0.1
   share: ^0.6.0+1
-  flutter_i18n: ^0.5.2
 
 flutter:
   fonts:
