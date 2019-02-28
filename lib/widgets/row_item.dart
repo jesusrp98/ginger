@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../util/colors.dart';
@@ -54,14 +53,12 @@ class RowItem extends StatelessWidget {
     return RowItem(
       title,
       AbsorbPointer(
-        absorbing: description ==
-            FlutterI18n.translate(context, 'spacex.other.unknown'),
+        absorbing: description == 'Unknown',
         child: InkResponse(
           child: _getText(
             context,
             description,
-            description !=
-                FlutterI18n.translate(context, 'spacex.other.unknown'),
+            description != 'Unknown',
           ),
           onTap: () => Navigator.push(
                 context,
@@ -81,7 +78,7 @@ class RowItem extends StatelessWidget {
       status == null
           ? Icons.remove_circle
           : (status ? Icons.check_circle : Icons.cancel),
-      //color: status == null ? nullIcon : (status ? acceptIcon : denyIcon),
+      color: status == null ? nullIcon : (status ? acceptIcon : denyIcon),
       size: 19.0,
     );
   }
