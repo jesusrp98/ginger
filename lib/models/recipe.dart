@@ -31,7 +31,7 @@ class Recipe {
       shareUrl: json['shareAs'],
       source: json['source'],
       servs: json['yield'],
-      diets: json['dietLabel'],
+      diets: json['dietLabels'],
       healths: json['healthLabels'],
       ingredients: json['ingredientLines'],
       calories: json['calories'],
