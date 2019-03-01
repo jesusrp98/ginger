@@ -6,9 +6,11 @@ import 'query.dart';
 import 'recipe.dart';
 
 class SearchModel extends QueryModel {
+  bool _success = false;
+
   @override
   Future loadData() {
-    return null;
+    setLoading(false);
   }
 
   void fetchQuery(String query) async {
@@ -27,4 +29,6 @@ class SearchModel extends QueryModel {
 
     setLoading(false);
   }
+
+  bool get onSuccess => _success;
 }

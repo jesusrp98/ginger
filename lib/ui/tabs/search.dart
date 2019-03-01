@@ -42,28 +42,30 @@ class SearchTab extends StatelessWidget {
             ),
             body: model.isLoading
                 ? LoadingIndicator()
-                : ListView.separated(
-                    itemCount: model.getItemCount,
-                    separatorBuilder: (context, index) => Divider(),
-                    itemBuilder: (context, index) {
-                      final Recipe recipe = model.getItem(index);
-                      return ListTile(
-                        leading: SizedBox(
-                          height: 64,
-                          width: 64,
-                          child: Image.network(recipe.photo),
-                        ),
-                        title: Text(recipe.name),
-                        subtitle: Text(recipe.servs.toString()),
-                        onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => RecipePage(recipe),
-                              ),
+                : (model.items.isNotEmpty || model.onSuccess
+                    ? ListView.separated(
+                        itemCount: model.getItemCount,
+                        separatorBuilder: (context, index) => Divider(),
+                        itemBuilder: (context, index) {
+                          final Recipe recipe = model.getItem(index);
+                          return ListTile(
+                            leading: SizedBox(
+                              height: 64,
+                              width: 64,
+                              child: Image.network(recipe.photo),
                             ),
-                      );
-                    },
-                  ),
+                            title: Text(recipe.name),
+                            subtitle: Text(recipe.servs.toString()),
+                            onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => RecipePage(recipe),
+                                  ),
+                                ),
+                          );
+                        },
+                      )
+                    : Center(child: Text('Just emptyness around here...'))),
           ),
     );
   }
