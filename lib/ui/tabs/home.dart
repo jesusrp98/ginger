@@ -32,12 +32,12 @@ class HomeTab extends StatelessWidget {
                         onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) =>
-                                    RecipePage(recipe),
+                                builder: (_) => RecipePage(recipe),
                               ),
                             ),
                       );
-                    }),
+                    },
+                  ),
           ),
     );
   }

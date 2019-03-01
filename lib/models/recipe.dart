@@ -37,10 +37,10 @@ class Recipe {
       calories: json['calories'],
       weight: json['totalWeight'],
       time: json['totalTime'],
-      sugar: NutritionalValue.fromJson(json['totalNutrients']['SUGAR']),
-      fat: NutritionalValue.fromJson(json['totalNutrients']['FAT']),
-      cholesterol: NutritionalValue.fromJson(json['totalNutrients']['CHOLE']),
-      proteins: NutritionalValue.fromJson(json['totalNutrients']['PROCNT']),
+      // sugar: NutritionalValue.fromJson(json['totalNutrients']['SUGAR']),
+      // fat: NutritionalValue.fromJson(json['totalNutrients']['FAT']),
+      // cholesterol: NutritionalValue.fromJson(json['totalNutrients']['CHOLE']),
+      // proteins: NutritionalValue.fromJson(json['totalNutrients']['PROCNT']),
     );
   }
 }
