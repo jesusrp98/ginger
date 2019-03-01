@@ -12,15 +12,31 @@ class SearchTab extends StatelessWidget {
     return ScopedModelDescendant<SearchModel>(
       builder: (context, child, model) => Scaffold(
             appBar: AppBar(
-              title: TextFormField(
-                keyboardType: TextInputType.emailAddress,
+              title: TextField(
                 autofocus: false,
-                onFieldSubmitted: (string) => model.fetchQuery(string),
+                onSubmitted: (string) =>
+                    string.isNotEmpty ? model.fetchQuery(string) : null,
                 decoration: InputDecoration(
-                  icon: const Icon(Icons.search),
-                  fillColor: Colors.red,
-                  labelText: 'Search',
-                  contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                  labelText: 'Search for recipes or cocktails',
+                  labelStyle: TextStyle(
+                    color: Theme.of(context).textTheme.subhead.color,
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 16,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).textTheme.caption.color,
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).accentColor,
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                 ),
               ),
             ),
