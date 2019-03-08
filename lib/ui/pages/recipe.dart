@@ -17,8 +17,8 @@ class RecipePage extends StatelessWidget {
       appBar: AppBar(title: Text(_recipe.name), centerTitle: true),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: ListView(
+         // mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             CardPhoto(
               url: _recipe.photo,
@@ -32,7 +32,7 @@ class RecipePage extends StatelessWidget {
                   RowItem.textRow(
                     context,
                     'Calories',
-                    _recipe.calories.toStringAsFixed(3) + " kcal",
+                    _recipe.calories.getCalories(),
                   ),
                   Separator.spacer(),
                   RowItem.textRow(
@@ -72,6 +72,14 @@ class RecipePage extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+            /*CardPage(
+              title: 'INGREDIENTS',
+              body: Text(_recipe.getIngredients()),
+            ),*/
+            CardPage(
+              title: 'ALLERGENS',
+              body: Text(_recipe.getAllergens()),
             ),
           ],
         ),
