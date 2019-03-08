@@ -3,6 +3,7 @@ class Recipe {
   final List healths, ingredients, diets;
   final double servs, calories, weight, time;
   final NutritionalValue sugar, fat, cholesterol, proteins;
+  final FailureDetails failureDetails;
 
   Recipe({
     this.name,
@@ -21,6 +22,7 @@ class Recipe {
     this.fat,
     this.cholesterol,
     this.proteins,
+    this.failureDetails,
   });
 
   factory Recipe.fromJson(Map<String, dynamic> json) {
@@ -37,23 +39,46 @@ class Recipe {
       calories: json['calories'],
       weight: json['totalWeight'],
       time: json['totalTime'],
-      // sugar: NutritionalValue.fromJson(json['totalNutrients']['SUGAR']),
-      // fat: NutritionalValue.fromJson(json['totalNutrients']['FAT']),
-      // cholesterol: NutritionalValue.fromJson(json['totalNutrients']['CHOLE']),
-      // proteins: NutritionalValue.fromJson(json['totalNutrients']['PROCNT']),
+      sugar: NutritionalValue.fromJson(json['totalNutrients']['SUGAR']),
+      fat: NutritionalValue.fromJson(json['totalNutrients']['FAT']),
+      cholesterol: NutritionalValue.fromJson(json['totalNutrients']['CHOLE']),
+      proteins: NutritionalValue.fromJson(json['totalNutrients']['PROCNT']),
+      failureDetails: setFailureDetails(json['FAT']),
     );
+  }
+  static FailureDetails setFailureDetails(Map<String, dynamic> failureDetails) {
+    try {
+      return FailureDetails.fromJson(failureDetails);
+    } catch (_) {
+      return null;
+    }
   }
 }
 
 class NutritionalValue {
-  final String label;
+  final String label, unit;
   final double quantity;
-  final String unit;
 
-  NutritionalValue({this.label, this.quantity, this.unit});
+  NutritionalValue({this.label, this.quantity, this.unit,});
 
   factory NutritionalValue.fromJson(Map<String, dynamic> json) {
     return NutritionalValue(
+      label: json['label'],
+      quantity: json['quantity'],
+      unit: json['unit'],
+    );
+  }
+}
+
+
+class FailureDetails {
+  final double quantity;
+  final String label, unit;
+
+  FailureDetails({this.label, this.quantity, this.unit,});
+
+  factory FailureDetails.fromJson(Map<String, dynamic> json) {
+    return FailureDetails(
       label: json['label'],
       quantity: json['quantity'],
       unit: json['unit'],
