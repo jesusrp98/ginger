@@ -73,14 +73,15 @@ class RecipePage extends StatelessWidget {
                 ],
               ),
             ),
+            CardPage(
+              title: 'INGREDIENTS',
+              body: Text(""),//Someghint
+            ),
             /*CardPage(
               title: 'INGREDIENTS',
               body: Text(_recipe.getIngredients),
-            ),
-            CardPage(
-              title: 'ALLERGENS',
-              body: Text(_recipe.getAllergens),
             ),*/
+
           ],
         ),
       ),
