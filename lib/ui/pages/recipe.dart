@@ -55,26 +55,20 @@ class RecipePage extends StatelessWidget {
                   Separator.spacer(),
                   RowItem.textRow(
                     context,
-                    'Fat',
-                    _recipe.fat.quantity.toStringAsFixed(3) +
-                        " " +
-                        _recipe.fat.unit.toString(),
+                    _recipe.fat.getLabel,
+                    _recipe.fat.getInfo,
                   ),
                   Separator.spacer(),
                   RowItem.textRow(
                     context,
-                    'Cholesterol',
-                    _recipe.cholesterol.quantity.toStringAsFixed(3) +
-                        " " +
-                        _recipe.cholesterol.unit.toString(),
+                    _recipe.cholesterol.getLabel,
+                    _recipe.cholesterol.getInfo,
                   ),
                   Separator.spacer(),
                   RowItem.textRow(
                     context,
-                    'Proteins',
-                    _recipe.proteins.quantity.toStringAsFixed(3) +
-                        " " +
-                        _recipe.proteins.unit.toString(),
+                    _recipe.proteins.getLabel,
+                    _recipe.proteins.getInfo,
                   ),
                 ],
               ),
