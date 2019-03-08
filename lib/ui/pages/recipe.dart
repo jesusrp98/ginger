@@ -15,76 +15,96 @@ class RecipePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(_recipe.name), centerTitle: true),
-      body: Padding(
+      body: ListView(
         padding: const EdgeInsets.all(16),
-        child: ListView(
-         // mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            CardPhoto(
-              url: _recipe.photo,
-              name: _recipe.name,
+        children: <Widget>[
+          CardPhoto(
+            url: _recipe.photo,
+            name: _recipe.name,
+            body: Column(
+              children: <Widget>[],
             ),
-            Separator.cardSpacer(),
-            CardPage(
-              title: 'NUTRITIONAL VALUES',
-              body: Column(
-                children: <Widget>[
-                  RowItem.textRow(
-                    context,
-                    'Calories',
-                    _recipe.getCalories,
-                  ),
-                  Separator.spacer(),
-                  RowItem.textRow(
-                    context,
-                    'Number of guests',
-                    _recipe.getPeople,
-                  ),
-                  Separator.spacer(),
-                  RowItem.textRow(
-                    context,
-                    'Preparation time',
-                    _recipe.getPreparationTime,
-                  ),
-                  Separator.spacer(),
-                  RowItem.textRow(
-                    context,
-                    'Diet',
-                    _recipe.getDiet,
-                  ),
-                  Separator.spacer(),
-                  RowItem.textRow(
-                    context,
-                    _recipe.fat.getLabel,
-                    _recipe.fat.getInfo,
-                  ),
-                  Separator.spacer(),
-                  RowItem.textRow(
-                    context,
-                    _recipe.cholesterol.getLabel,
-                    _recipe.cholesterol.getInfo,
-                  ),
-                  Separator.spacer(),
-                  RowItem.textRow(
-                    context,
-                    _recipe.proteins.getLabel,
-                    _recipe.proteins.getInfo,
-                  ),
-                ],
-              ),
+          ),
+          Separator.cardSpacer(),
+          CardPage(
+            title: 'NUTRITIONAL VALUES',
+            body: Column(
+              children: <Widget>[
+                RowItem.textRow(
+                  context,
+                  'Calories',
+                  _recipe.getCalories,
+                ),
+                Separator.spacer(),
+                RowItem.textRow(
+                  context,
+                  'Number of guests',
+                  _recipe.getPeople,
+                ),
+                Separator.spacer(),
+                RowItem.textRow(
+                  context,
+                  'Preparation time',
+                  _recipe.getPreparationTime,
+                ),
+                Separator.spacer(),
+                RowItem.textRow(
+                  context,
+                  'Diet',
+                  _recipe.getDiet,
+                ),
+                Separator.divider(),
+                RowItem.textRow(
+                  context,
+                  _recipe.fat.getLabel,
+                  _recipe.fat.getInfo,
+                ),
+                Separator.spacer(),
+                RowItem.textRow(
+                  context,
+                  _recipe.cholesterol.getLabel,
+                  _recipe.cholesterol.getInfo,
+                ),
+                Separator.spacer(),
+                RowItem.textRow(
+                  context,
+                  _recipe.proteins.getLabel,
+                  _recipe.proteins.getInfo,
+                ),
+              ],
             ),
-            CardPage(
-              title: 'INGREDIENTS',
-              body: Text(""),//Someghint
+          ),
+          CardPage(
+            title: 'INGREDIENTS',
+            body: Column(
+              children: _recipe.ingredients
+                  .map((item) => _getIngredients(
+                        context,
+                        _recipe.ingredients,
+                        item,
+                      ))
+                  .toList(),
             ),
-            /*CardPage(
-              title: 'INGREDIENTS',
-              body: Text(_recipe.getIngredients),
-            ),*/
-
-          ],
-        ),
+          ),
+        ],
       ),
     );
+  }
+
+  Column _getIngredients(
+    BuildContext context,
+    List ingredients,
+    String ingredient,
+  ) {
+    return Column(children: <Widget>[
+      Text(
+        ingredient,
+        textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.subhead.copyWith(
+              color: Theme.of(context).textTheme.caption.color,
+            ),
+      ),
+      ingredient != ingredients.last ? Separator.spacer() : Separator.none(),
+    ]);
   }
 }

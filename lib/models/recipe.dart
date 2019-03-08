@@ -58,7 +58,8 @@ class Recipe {
 
   String get getCalories => '${calories.round()} kcal';
 
-  String get getPeople => '$servs ${servs == 1 ? 'person' : 'people'}';
+  String get getPeople =>
+      '${NumberFormat.decimalPattern().format(servs)} ${servs == 1 ? 'person' : 'people'}';
 
   String get getPreparationTime {
     if (time < 60)
@@ -70,8 +71,8 @@ class Recipe {
   String get getDiet {
     String auxString = '';
 
-    ingredients.forEach(
-      (item) => auxString += item + ((ingredients.last == item) ? '' : '\n'),
+    healths.forEach(
+      (item) => auxString += item + ((healths.last == item) ? '' : '\n'),
     );
 
     return auxString;
