@@ -43,7 +43,7 @@ class Recipe {
       proteins: setNutritionalValue(json['totalNutrients']['PROCNT']),
     );
   }
-  
+
   static NutritionalValue setNutritionalValue(
     Map<String, dynamic> nutritionalValue,
   ) {
@@ -68,4 +68,8 @@ class NutritionalValue {
       unit: json['unit'],
     );
   }
+
+  String get getLabel => label;
+
+  String get getInfo => '${quantity.round()} $unit';
 }
