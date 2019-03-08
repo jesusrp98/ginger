@@ -32,25 +32,25 @@ class RecipePage extends StatelessWidget {
                   RowItem.textRow(
                     context,
                     'Calories',
-                    _recipe.calories.getCalories(),
+                    _recipe.getCalories,
                   ),
                   Separator.spacer(),
                   RowItem.textRow(
                     context,
                     'Number of guests',
-                    _recipe.servs.toString(),
+                    _recipe.getPeople,
                   ),
                   Separator.spacer(),
                   RowItem.textRow(
                     context,
                     'Preparation time',
-                    _recipe.time.toString(),
+                    _recipe.getPreparationTime,
                   ),
                   Separator.spacer(),
                   RowItem.textRow(
                     context,
                     'Diet',
-                    _recipe.diets.toString(),
+                    _recipe.getDiet,
                   ),
                   Separator.spacer(),
                   RowItem.textRow(
@@ -75,12 +75,12 @@ class RecipePage extends StatelessWidget {
             ),
             /*CardPage(
               title: 'INGREDIENTS',
-              body: Text(_recipe.getIngredients()),
-            ),*/
+              body: Text(_recipe.getIngredients),
+            ),
             CardPage(
               title: 'ALLERGENS',
-              body: Text(_recipe.getAllergens()),
-            ),
+              body: Text(_recipe.getAllergens),
+            ),*/
           ],
         ),
       ),
