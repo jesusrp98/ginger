@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class Recipe {
   final String name, photo, url, shareUrl, source;
   final List healths, ingredients, diets;
@@ -52,6 +54,27 @@ class Recipe {
     } catch (_) {
       return null;
     }
+  }
+
+  String get getCalories => '${calories.round()} kcal';
+
+  String get getPeople => '$servs ${servs == 1 ? 'person' : 'people'}';
+
+  String get getPreparationTime {
+    if (time < 60)
+      return '${NumberFormat.decimalPattern().format(time)} min';
+    else
+      return '${NumberFormat.decimalPattern().format(time / 60)} h';
+  }
+
+  String get getDiet {
+    String auxString = '';
+
+    ingredients.forEach(
+      (item) => auxString += item + ((ingredients.last == item) ? '' : '\n'),
+    );
+
+    return auxString;
   }
 }
 
