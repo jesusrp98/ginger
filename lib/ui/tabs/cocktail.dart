@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ginger/ui/pages/cocktail.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../models/cocktail.dart';
@@ -26,6 +27,12 @@ class CocktailTab extends StatelessWidget {
                         ),
                         title: Text(cocktail.name),
                         subtitle: Text(cocktail.glassType),
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => CocktailPage(cocktail),
+                          ),
+                        ),
                       );
                     },
                     separatorBuilder: (_, index) => Divider(),
