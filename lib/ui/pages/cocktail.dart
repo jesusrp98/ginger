@@ -22,7 +22,7 @@ class CocktailPage extends StatelessWidget {
             url: _cocktail.photo,
             name: _cocktail.name,
             body: Row(
-              
+
             ),
           ),
           Separator.cardSpacer(),
@@ -75,47 +75,17 @@ class CocktailPage extends StatelessWidget {
             ),
           ),
           Separator.cardSpacer(),
+          CardPage(
+            title: 'INSTRUCTIONS',
+            body: Column(
+              children: <Widget>[
+                Text(_cocktail.getInstruction),
+              ],
+            ),
+          ),
+          Separator.cardSpacer(),
         ],
       ),
-    );
-  }
-
-  Column _getIngredients(
-    BuildContext context,
-    List ingredients,
-    String ingredient,
-  ) {
-    return Column(children: <Widget>[
-      Text(
-        ingredient,
-        textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.subhead.copyWith(
-              color: Theme.of(context).textTheme.caption.color,
-            ),
-      ),
-      ingredient != ingredients.last ? Separator.spacer() : Separator.none(),
-    ]);
-  }
-}
-
-class RecipeDetails extends StatelessWidget {
-  final Widget icon;
-  final String title;
-
-  RecipeDetails({this.icon, this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        icon,
-        Text(
-          title,
-          style: Theme.of(context).textTheme.subhead.copyWith(
-                color: Theme.of(context).textTheme.caption.color,
-              ),
-        )
-      ],
     );
   }
 }
