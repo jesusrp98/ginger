@@ -39,7 +39,7 @@ class CocktailPage extends StatelessWidget {
                 RowItem.textRow(
                   context,
                   'Alcoholic',
-                  //_cocktail.getGetter,
+                  _cocktail.getCategory, //Crear getter de alcoholic
                 ),
                 Separator.spacer(),
                 RowItem.textRow(
@@ -75,18 +75,6 @@ class CocktailPage extends StatelessWidget {
             ),
           ),
           Separator.cardSpacer(),
-          CardPage(
-            title: 'INGREDIENTS',
-            body: Column(
-              children: _recipe.ingredients
-                  .map((item) => _getIngredients(
-                        context,
-                        _recipe.ingredients,
-                        item,
-                      ))
-                  .toList(),
-            ),
-          ),
         ],
       ),
     );
