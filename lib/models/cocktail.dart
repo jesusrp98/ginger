@@ -22,47 +22,64 @@ class CocktailModel extends QueryModel {
 }
 
 class Cocktail {
-  final String name, category, glassType, instruction, photo, tag;
-  final List ingredients, measures;
+  final String name, tag, glassType, instructions, photo;
+  final List<CocktailIngredient> ingredients;
   final bool isAlcoholic;
 
   Cocktail({
     this.name,
-    this.category,
     this.tag,
     this.glassType,
-    this.instruction,
+    this.instructions,
     this.photo,
     this.ingredients,
-    this.measures,
     this.isAlcoholic,
   });
 
   factory Cocktail.fromJson(Map<String, dynamic> json) {
     return Cocktail(
       name: json['strDrink'],
-      category: json['strCategory'],
       tag: json['strIBA'],
-      isAlcoholic: json['strAlcoholic'] == 'Alcoholic',
       glassType: json['strGlass'],
-      instruction: json['strInstruction'],
+      isAlcoholic: json['strAlcoholic'] == 'Alcoholic',
+      instructions: json['strInstruction'],
       photo: json['strDrinkThumb'],
       ingredients: [
-        json['strIngredient1'],
-        json['strIngredient2'],
-        json['strIngredient3'],
-        json['strIngredient4'],
-      ],
-      measures: [
-        json['strMeasure1'],
-        json['strMeasure2'],
-        json['strMeasure3'],
-        json['strMeasure4'],
+        CocktailIngredient(
+          name: json['strIngredient1'],
+          measure: json['strMeasure1'],
+        ),
+        CocktailIngredient(
+          name: json['strIngredient2'],
+          measure: json['strMeasure2'],
+        ),
+        CocktailIngredient(
+          name: json['strIngredient3'],
+          measure: json['strMeasure3'],
+        ),
+        CocktailIngredient(
+          name: json['strIngredient4'],
+          measure: json['strMeasure4'],
+        ),
       ],
     );
   }
 
-  String get getCategory => category;
-  String get getGlass => glassType;
-  String get getInstruction => instruction;
+  String get getTag => tag ?? 'Unknown';
+
+  String get getGlass => glassType ?? 'Unknown';
+
+  String get getInstructions =>
+      instructions ?? 'There are no instructions provided';
+
+  List get getIngredients =>
+      ingredients..removeWhere((ingredient) => ingredient.name == null);
+}
+
+class CocktailIngredient {
+  final String name, measure;
+
+  CocktailIngredient({this.name, this.measure});
+
+  String get getMeasure => measure ?? '-';
 }

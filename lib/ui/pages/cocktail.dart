@@ -21,9 +21,7 @@ class CocktailPage extends StatelessWidget {
           HeadCardPage(
             url: _cocktail.photo,
             name: _cocktail.name,
-            body: Row(
-
-            ),
+            body: Row(),
           ),
           Separator.cardSpacer(),
           CardPage(
@@ -32,60 +30,40 @@ class CocktailPage extends StatelessWidget {
               children: <Widget>[
                 RowItem.textRow(
                   context,
-                  'Category',
-                  _cocktail.getCategory,
-                ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  context,
-                  'Alcoholic',
-                  _cocktail.getCategory, //Crear getter de alcoholic
-                ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  context,
-                  'Type of Glass',
+                  'Type of glass',
                   _cocktail.getGlass,
                 ),
+                Separator.spacer(),
+                RowItem.iconRow(
+                  'Alcoholic',
+                  _cocktail.isAlcoholic,
+                ),
                 Separator.divider(),
-                RowItem.textRow(
-                  context,
-                  _cocktail.ingredients[0],
-                  _cocktail.measures[0],
-                ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  context,
-                  _cocktail.ingredients[1],
-                  _cocktail.measures[1],
-                ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  context,
-                  _cocktail.ingredients[2],
-                  _cocktail.measures[2],
-                ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  context,
-                  _cocktail.ingredients[3],
-                  _cocktail.measures[3],
-                ),
+                Column(
+                  children: _cocktail.getIngredients
+                      .map((ingredient) => _getIngredients(
+                            context,
+                            _cocktail.getIngredients,
+                            ingredient,
+                          ))
+                      .toList(),
+                )
               ],
             ),
           ),
-          Separator.cardSpacer(),
-          CardPage(
-            title: 'INSTRUCTIONS',
-            body: Column(
-              children: <Widget>[
-                Text(_cocktail.getInstruction),
-              ],
-            ),
-          ),
-          Separator.cardSpacer(),
         ],
       ),
     );
+  }
+
+  Column _getIngredients(
+    BuildContext context,
+    List ingredients,
+    CocktailIngredient ingredient,
+  ) {
+    return Column(children: <Widget>[
+      RowItem.textRow(context, ingredient.name, ingredient.measure),
+      ingredient != ingredients.last ? Separator.spacer() : Separator.none(),
+    ]);
   }
 }
