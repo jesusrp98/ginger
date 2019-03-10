@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:ginger/models/recipe.dart';
-import 'package:ginger/ui/pages/recipe.dart';
-import 'package:ginger/ui/tabs/big_tip.dart';
-import 'package:ginger/widgets/loading_indicator.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+import '../../models/recipe.dart';
 import '../../models/search.dart';
+import '../../widgets/big_tip.dart';
+import '../../widgets/loading_indicator.dart';
+import '../pages/recipe.dart';
+import '../pages/search_filters.dart';
 
 class SearchTab extends StatelessWidget {
   @override
@@ -13,6 +14,22 @@ class SearchTab extends StatelessWidget {
     return ScopedModelDescendant<SearchModel>(
       builder: (context, child, model) => Scaffold(
             appBar: AppBar(
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.tune),
+                  onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => ScopedModel(
+                                model: model,
+                                child: SearchFiltersPage(),
+                              ),
+                          fullscreenDialog: true,
+                        ),
+                      ),
+                  tooltip: 'Filters',
+                )
+              ],
               title: TextField(
                 autofocus: false,
                 onSubmitted: (string) =>
@@ -51,7 +68,7 @@ class SearchTab extends StatelessWidget {
                       return Center(
                         child: BigTip(
                           icon: Icons.search,
-                          message: 'Start tying',
+                          message: 'Look for recipes or cocktails',
                         ),
                       );
                     else

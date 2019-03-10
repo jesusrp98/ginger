@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ginger/widgets/separator.dart';
+
+import 'separator.dart';
 
 class BigTip extends StatelessWidget {
   final IconData icon;
@@ -18,10 +19,12 @@ class BigTip extends StatelessWidget {
           size: 100,
           color: Theme.of(context).textTheme.caption.color,
         ),
-        Separator.spacer(height: 16.0),
+        Separator.spacer(height: 16),
         Text(
           message,
-          style: Theme.of(context).textTheme.subhead,
+          style: Theme.of(context).textTheme.title.copyWith(
+                color: Theme.of(context).textTheme.caption.color,
+              ),
         ),
       ],
     );
