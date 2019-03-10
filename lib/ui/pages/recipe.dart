@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../models/recipe.dart';
-import '../../widgets/card_main_info.dart';
 import '../../widgets/card_page.dart';
+import '../../widgets/head_card_page.dart';
 import '../../widgets/row_item.dart';
 import '../../widgets/separator.dart';
 
@@ -18,11 +18,27 @@ class RecipePage extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: <Widget>[
-          CardPhoto(
+          HeadCardPage(
             url: _recipe.photo,
             name: _recipe.name,
-            body: Column(
-              children: <Widget>[],
+            body: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                RecipeDetails(
+                    icon: Icon(
+                      Icons.people,
+                      size: 27,
+                      color: Theme.of(context).textTheme.caption.color,
+                    ),
+                    title: _recipe.getPeople),
+                RecipeDetails(
+                    icon: Icon(
+                      Icons.schedule,
+                      size: 27,
+                      color: Theme.of(context).textTheme.caption.color,
+                    ),
+                    title: _recipe.getPreparationTime),
+              ],
             ),
           ),
           Separator.cardSpacer(),
@@ -32,28 +48,22 @@ class RecipePage extends StatelessWidget {
               children: <Widget>[
                 RowItem.textRow(
                   context,
-                  'Calories',
+                  'Total calories',
                   _recipe.getCalories,
                 ),
                 Separator.spacer(),
                 RowItem.textRow(
                   context,
-                  'Number of guests',
-                  _recipe.getPeople,
-                ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  context,
-                  'Preparation time',
-                  _recipe.getPreparationTime,
-                ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  context,
-                  'Diet',
+                  'Diet attributes',
                   _recipe.getDiet,
                 ),
                 Separator.divider(),
+                RowItem.textRow(
+                  context,
+                  _recipe.sugar.getLabel,
+                  _recipe.sugar.getInfo,
+                ),
+                Separator.spacer(),
                 RowItem.textRow(
                   context,
                   _recipe.fat.getLabel,
@@ -74,6 +84,7 @@ class RecipePage extends StatelessWidget {
               ],
             ),
           ),
+          Separator.cardSpacer(),
           CardPage(
             title: 'INGREDIENTS',
             body: Column(
@@ -106,5 +117,27 @@ class RecipePage extends StatelessWidget {
       ),
       ingredient != ingredients.last ? Separator.spacer() : Separator.none(),
     ]);
+  }
+}
+
+class RecipeDetails extends StatelessWidget {
+  final Widget icon;
+  final String title;
+
+  RecipeDetails({this.icon, this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        icon,
+        Text(
+          title,
+          style: Theme.of(context).textTheme.subhead.copyWith(
+                color: Theme.of(context).textTheme.caption.color,
+              ),
+        )
+      ],
+    );
   }
 }
