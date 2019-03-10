@@ -62,6 +62,6 @@ class Cocktail {
     );
   }
 
-  String get getCategory ==> category;
-  String get getGlass ==> glassType;
+  String get getCategory => category;
+  String get getGlass => glassType;
 }
