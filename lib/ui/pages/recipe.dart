@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 
 import '../../models/recipe.dart';
 import '../../widgets/card_page.dart';
@@ -20,7 +21,14 @@ class RecipePage extends StatelessWidget {
         children: <Widget>[
           HeadCardPage(
             url: _recipe.photo,
-            name: _recipe.name,
+            title: _recipe.name,
+            subtitle: FlatButton(
+              child: Text('INSTRUCTIONS'),
+              onPressed: () => FlutterWebBrowser.openWebPage(
+                    url: _recipe.url,
+                    androidToolbarColor: Theme.of(context).primaryColor,
+                  ),
+            ),
             body: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[

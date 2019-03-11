@@ -20,7 +20,13 @@ class CocktailPage extends StatelessWidget {
         children: <Widget>[
           HeadCardPage(
             url: _cocktail.photo,
-            name: _cocktail.name,
+            title: _cocktail.name,
+            subtitle: Text(
+              _cocktail.tag,
+              style: Theme.of(context).textTheme.subhead.copyWith(
+                    color: Theme.of(context).textTheme.caption.color,
+                  ),
+            ),
             body: Row(),
           ),
           Separator.cardSpacer(),
