@@ -33,19 +33,21 @@ class RecipePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 RecipeDetails(
-                    icon: Icon(
-                      Icons.people,
-                      size: 27,
-                      color: Theme.of(context).textTheme.caption.color,
-                    ),
-                    title: _recipe.getPeople),
+                  icon: Icon(
+                    Icons.people,
+                    size: 27,
+                    color: Theme.of(context).textTheme.caption.color,
+                  ),
+                  title: _recipe.getPeople,
+                ),
                 RecipeDetails(
-                    icon: Icon(
-                      Icons.schedule,
-                      size: 27,
-                      color: Theme.of(context).textTheme.caption.color,
-                    ),
-                    title: _recipe.getPreparationTime),
+                  icon: Icon(
+                    Icons.schedule,
+                    size: 27,
+                    color: Theme.of(context).textTheme.caption.color,
+                  ),
+                  title: _recipe.getPreparationTime,
+                ),
               ],
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 
 import 'hero_image.dart';
 import 'separator.dart';
@@ -20,7 +21,14 @@ class HeadCardPage extends StatelessWidget {
         padding: const EdgeInsets.all(24),
         child: Column(children: <Widget>[
           Row(children: <Widget>[
-            HeroImage.card(url: url, tag: title),
+            HeroImage.card(
+              url: url,
+              tag: title,
+              onTap: () async => await FlutterWebBrowser.openWebPage(
+                    url: url,
+                    androidToolbarColor: Theme.of(context).primaryColor,
+                  ),
+            ),
             Separator.spacer(width: 14),
             Expanded(
               child: Column(
