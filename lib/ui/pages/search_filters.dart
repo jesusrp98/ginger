@@ -24,7 +24,7 @@ class SearchFiltersPage extends StatelessWidget {
                           NumberPickerColumn(
                             begin: 500,
                             end: 10000,
-                            initValue: model.filter.totalCalories,
+                            initValue: 0,
                           ),
                         ]),
                         hideHeader: true,
@@ -81,7 +81,7 @@ class SearchFiltersPage extends StatelessWidget {
                   trailing: Icon(Icons.chevron_right),
                   onTap: () => Picker(
                         adapter: NumberPickerAdapter(data: [
-                          NumberPickerColumn(begin: 10, end: 180, initValue: 1),
+                          NumberPickerColumn(begin: 10, end: 180, initValue: 0),
                         ]),
                         hideHeader: true,
                         title: Text('Duration', textAlign: TextAlign.center),
@@ -98,11 +98,7 @@ class SearchFiltersPage extends StatelessWidget {
                   trailing: Icon(Icons.chevron_right),
                   onTap: () => Picker(
                         adapter: NumberPickerAdapter(data: [
-                          NumberPickerColumn(
-                            begin: 1,
-                            end: 10,
-                            initValue: model.filter.ingredients,
-                          ),
+                          NumberPickerColumn(begin: 1, end: 10, initValue: 0),
                         ]),
                         hideHeader: true,
                         title: Text('Ingredients', textAlign: TextAlign.center),
