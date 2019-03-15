@@ -1,7 +1,8 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
-import '../util/url.dart';
 
+import 'package:http/http.dart' as http;
+
+import '../util/url.dart';
 import 'query.dart';
 
 class CocktailModel extends QueryModel {
@@ -72,8 +73,8 @@ class Cocktail {
   String get getInstructions =>
       instructions ?? 'There are no instructions provided';
 
-  List get getIngredients =>
-      ingredients..removeWhere((ingredient) => ingredient.name == null);
+  List get getIngredients => ingredients
+    ..removeWhere((CocktailIngredient ingredient) => ingredient.name == null);
 }
 
 class CocktailIngredient {
@@ -81,5 +82,5 @@ class CocktailIngredient {
 
   CocktailIngredient({this.name, this.measure});
 
-  String get getMeasure => measure ?? '-';
+  String get getMeasure => measure.isNotEmpty ? measure : '-';
 }

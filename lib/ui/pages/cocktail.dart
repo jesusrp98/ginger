@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ginger/widgets/expand_widget.dart';
 
 import '../../models/cocktail.dart';
 import '../../widgets/card_page.dart';
+import '../../widgets/expand_widget.dart';
 import '../../widgets/head_card_page.dart';
 import '../../widgets/row_item.dart';
 import '../../widgets/separator.dart';
@@ -29,12 +29,13 @@ class CocktailPage extends StatelessWidget {
                   ),
             ),
             body: TextExpand(
-                text: _cocktail.getInstructions,
-                maxLength: 3,
-                style: TextStyle(
-                  color: Theme.of(context).textTheme.caption.color,
-                  fontSize: 15,
-                )),
+              text: _cocktail.getInstructions,
+              maxLength: 7,
+              style: TextStyle(
+                color: Theme.of(context).textTheme.caption.color,
+                fontSize: 15,
+              ),
+            ),
           ),
           Separator.cardSpacer(),
           CardPage(
@@ -75,7 +76,7 @@ class CocktailPage extends StatelessWidget {
     CocktailIngredient ingredient,
   ) {
     return Column(children: <Widget>[
-      RowItem.textRow(context, ingredient.name, ingredient.measure),
+      RowItem.textRow(context, ingredient.name, ingredient.getMeasure),
       ingredient != ingredients.last ? Separator.spacer() : Separator.none(),
     ]);
   }

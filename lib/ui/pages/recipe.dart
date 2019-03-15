@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
+import 'package:ginger/widgets/expand_widget.dart';
 
 import '../../models/recipe.dart';
 import '../../widgets/card_page.dart';
@@ -22,9 +23,15 @@ class RecipePage extends StatelessWidget {
           HeadCardPage(
             url: _recipe.photo,
             title: _recipe.name,
-            subtitle: FlatButton(
-              child: Text('INSTRUCTIONS'),
-              onPressed: () => FlutterWebBrowser.openWebPage(
+            subtitle: InkResponse(
+              child: Text(
+                'INSTRUCTIONS',
+                style: Theme.of(context).textTheme.subhead.copyWith(
+                      color: Theme.of(context).textTheme.caption.color,
+                      decoration: TextDecoration.underline,
+                    ),
+              ),
+              onTap: () async => await FlutterWebBrowser.openWebPage(
                     url: _recipe.url,
                     androidToolbarColor: Theme.of(context).primaryColor,
                   ),
@@ -68,9 +75,7 @@ class RecipePage extends StatelessWidget {
                     ),
                     RecipeDetails(
                       icon: Icon(
-                        _recipe.isVegan
-                            ? Icons.check_circle
-                            : Icons.cancel,
+                        _recipe.isVegan ? Icons.check_circle : Icons.cancel,
                         size: 27,
                         color: Theme.of(context).textTheme.caption.color,
                       ),
@@ -138,16 +143,35 @@ class RecipePage extends StatelessWidget {
             ),
           ),
           Separator.cardSpacer(),
-          /*CardPage(
-            title: 'ALLERGENS',
-            body: ListView.separated(
-              itemCount: _recipe.healths.length,
-              separatorBuilder: (context, index) => Divider(),
-              itemBuilder: (context, index) {
-                RowItem.iconRow("Hola", _recipe.hasLabel("Vegan"));
-              }
-            ),
-          ),*/
+          CardPage(
+              title: 'ALLERGENS',
+              body: Column(
+                children: <Widget>[
+                  Column(
+                    children: _recipe.getTrueHealths
+                        .map((health) => _getHealthLabels(
+                              _recipe.getTrueHealths,
+                              health,
+                              true,
+                            ))
+                        .toList(),
+                  ),
+                  RowExpand(Column(
+                    children: <Widget>[
+                      Separator.spacer(),
+                      Column(
+                        children: _recipe.getFalseHealths
+                            .map((health) => _getHealthLabels(
+                                  _recipe.getFalseHealths,
+                                  health,
+                                  false,
+                                ))
+                            .toList(),
+                      ),
+                    ],
+                  )),
+                ],
+              )),
         ],
       ),
     );
@@ -167,6 +191,13 @@ class RecipePage extends StatelessWidget {
             ),
       ),
       ingredient != ingredients.last ? Separator.spacer() : Separator.none(),
+    ]);
+  }
+
+  Column _getHealthLabels(List healthLabels, String health, bool state) {
+    return Column(children: <Widget>[
+      RowItem.iconRow(health, state),
+      health != healthLabels.last ? Separator.spacer() : Separator.none(),
     ]);
   }
 }

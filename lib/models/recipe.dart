@@ -1,5 +1,25 @@
 import 'package:intl/intl.dart';
 
+const List staticHealthLabels = [
+  'Dairy-free',
+  'Gluten-free',
+  'Wheat-free',
+  'Egg-free',
+  'Peanut-free',
+  'Tree-nut-free',
+  'Soy-free',
+  'Fish-free',
+  'Shellfish-free',
+];
+
+const List noHealthLabels = [
+  'Vegan',
+  'Vegetarian',
+  'Paleo',
+  'Fat-free',
+  'Low-sugar',
+];
+
 class Recipe {
   final String name, photo, url, shareUrl, source;
   final List healths, ingredients, diets;
@@ -67,17 +87,19 @@ class Recipe {
     else
       return '${NumberFormat.decimalPattern().format(time / 60)} h';
   }
-  
-  bool get isVegetarian =>
-      healths.contains('Vegeterian');
 
-  bool get isVegan =>
-      healths.contains('Vegan');
+  bool get isVegetarian => hasLabel('Vegeterian');
 
-  bool hasLabel(String label){
-    return healths.contains(label);
-  }
-  
+  bool get isVegan => hasLabel('Vegan');
+
+  bool hasLabel(String label) => healths.contains(label);
+
+  List get getTrueHealths =>
+      healths.where((health) => !noHealthLabels.contains(health)).toList();
+
+  List get getFalseHealths =>
+      staticHealthLabels.where((health) => !hasLabel(health)).toList();
+
   String get getDiet {
     String auxString = '';
 
@@ -86,7 +108,6 @@ class Recipe {
     );
 
     return auxString;
-    
   }
 }
 
