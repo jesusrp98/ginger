@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "816451648935",
+    "firebase_url": "https://ginger-c7530.firebaseio.com",
+    "project_id": "ginger-c7530",
+    "storage_bucket": "ginger-c7530.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:816451648935:android:92db8ff5091bdc86",
+        "android_client_info": {
+          "package_name": "com.chechu.ginger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "816451648935-ecaoh9h8fvmp6giove43j3e9nod9le5n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2Muoplf75aC4o2zk74rRFmImVstWIJnE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
