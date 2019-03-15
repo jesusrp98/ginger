@@ -42,7 +42,7 @@ class Cocktail {
       tag: json['strIBA'],
       glassType: json['strGlass'],
       isAlcoholic: json['strAlcoholic'] == 'Alcoholic',
-      instructions: json['strInstruction'],
+      instructions: json['strInstructions'],
       photo: json['strDrinkThumb'],
       ingredients: [
         CocktailIngredient(

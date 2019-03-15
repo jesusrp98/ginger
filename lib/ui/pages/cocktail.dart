@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ginger/widgets/expand_widget.dart';
 
 import '../../models/cocktail.dart';
 import '../../widgets/card_page.dart';
@@ -22,12 +23,18 @@ class CocktailPage extends StatelessWidget {
             url: _cocktail.photo,
             title: _cocktail.name,
             subtitle: Text(
-              _cocktail.tag,
+              _cocktail.getTag,
               style: Theme.of(context).textTheme.subhead.copyWith(
                     color: Theme.of(context).textTheme.caption.color,
                   ),
             ),
-            body: Row(),
+            body: TextExpand(
+                text: _cocktail.getInstructions,
+                maxLength: 3,
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.caption.color,
+                  fontSize: 15,
+                )),
           ),
           Separator.cardSpacer(),
           CardPage(

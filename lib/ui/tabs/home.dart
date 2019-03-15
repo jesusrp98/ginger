@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ginger/widgets/hero_image.dart';
+import 'package:ginger/widgets/list_cell.dart';
+import 'package:ginger/widgets/separator.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../models/home.dart';
@@ -18,17 +21,16 @@ class HomeTab extends StatelessWidget {
                 ? Center(child: Text('LOADING...'))
                 : ListView.separated(
                     itemCount: model.getItemCount,
-                    separatorBuilder: (context, index) => Divider(),
+                    separatorBuilder: (context, index) => Separator.divider(height: 0, indent: 88),
                     itemBuilder: (context, index) {
                       final Recipe recipe = model.getItem(index);
-                      return ListTile(
-                        leading: SizedBox(
-                          height: 64,
-                          width: 64,
-                          child: Image.network(recipe.photo),
+                      return ListCell(
+                        leading: HeroImage.list(
+                          url: recipe.photo,
+                          tag: recipe.name,
                         ),
-                        title: Text(recipe.name),
-                        subtitle: Text(recipe.servs.toString()),
+                        title: recipe.name,
+                        subtitle: 'Serves ' + recipe.getPeople,
                         onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(

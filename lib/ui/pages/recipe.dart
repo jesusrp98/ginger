@@ -29,24 +29,54 @@ class RecipePage extends StatelessWidget {
                     androidToolbarColor: Theme.of(context).primaryColor,
                   ),
             ),
-            body: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+            body: Column(
               children: <Widget>[
-                RecipeDetails(
-                  icon: Icon(
-                    Icons.people,
-                    size: 27,
-                    color: Theme.of(context).textTheme.caption.color,
-                  ),
-                  title: _recipe.getPeople,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    RecipeDetails(
+                      icon: Icon(
+                        Icons.people,
+                        size: 27,
+                        color: Theme.of(context).textTheme.caption.color,
+                      ),
+                      title: _recipe.getPeople,
+                    ),
+                    RecipeDetails(
+                      icon: Icon(
+                        Icons.schedule,
+                        size: 27,
+                        color: Theme.of(context).textTheme.caption.color,
+                      ),
+                      title: _recipe.getPreparationTime,
+                    ),
+                  ],
                 ),
-                RecipeDetails(
-                  icon: Icon(
-                    Icons.schedule,
-                    size: 27,
-                    color: Theme.of(context).textTheme.caption.color,
-                  ),
-                  title: _recipe.getPreparationTime,
+                Separator.spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    RecipeDetails(
+                      icon: Icon(
+                        _recipe.isVegetarian
+                            ? Icons.check_circle
+                            : Icons.cancel,
+                        size: 27,
+                        color: Theme.of(context).textTheme.caption.color,
+                      ),
+                      title: 'Vegetarian',
+                    ),
+                    RecipeDetails(
+                      icon: Icon(
+                        _recipe.isVegan
+                            ? Icons.check_circle
+                            : Icons.cancel,
+                        size: 27,
+                        color: Theme.of(context).textTheme.caption.color,
+                      ),
+                      title: 'Vegan',
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -107,6 +137,17 @@ class RecipePage extends StatelessWidget {
                   .toList(),
             ),
           ),
+          Separator.cardSpacer(),
+          /*CardPage(
+            title: 'ALLERGENS',
+            body: ListView.separated(
+              itemCount: _recipe.healths.length,
+              separatorBuilder: (context, index) => Divider(),
+              itemBuilder: (context, index) {
+                RowItem.iconRow("Hola", _recipe.hasLabel("Vegan"));
+              }
+            ),
+          ),*/
         ],
       ),
     );

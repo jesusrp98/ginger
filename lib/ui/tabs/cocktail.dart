@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ginger/ui/pages/cocktail.dart';
+import 'package:ginger/widgets/hero_image.dart';
+import 'package:ginger/widgets/list_cell.dart';
+import 'package:ginger/widgets/separator.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../models/cocktail.dart';
@@ -17,16 +20,16 @@ class CocktailTab extends StatelessWidget {
                 ? Text('LOADING...')
                 : ListView.separated(
                     itemCount: model.getItemCount,
+                    separatorBuilder: (context, index) => Separator.divider(height: 0, indent: 88),
                     itemBuilder: (_, index) {
                       final Cocktail cocktail = model.getItem(index);
-                      return ListTile(
-                        leading: SizedBox(
-                          height: 64,
-                          width: 64,
-                          child: Image.network(cocktail.photo),
+                      return ListCell(
+                        leading: HeroImage.list(
+                          url: cocktail.photo,
+                          tag: cocktail.name,
                         ),
-                        title: Text(cocktail.name),
-                        subtitle: Text(cocktail.glassType),
+                        title: cocktail.name,
+                        subtitle: cocktail.glassType,
                         onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -35,7 +38,6 @@ class CocktailTab extends StatelessWidget {
                         ),
                       );
                     },
-                    separatorBuilder: (_, index) => Divider(),
                   ),
           ),
     );

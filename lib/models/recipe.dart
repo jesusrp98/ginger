@@ -67,7 +67,17 @@ class Recipe {
     else
       return '${NumberFormat.decimalPattern().format(time / 60)} h';
   }
+  
+  bool get isVegetarian =>
+      healths.contains('Vegeterian');
 
+  bool get isVegan =>
+      healths.contains('Vegan');
+
+  bool hasLabel(String label){
+    return healths.contains(label);
+  }
+  
   String get getDiet {
     String auxString = '';
 
@@ -76,6 +86,7 @@ class Recipe {
     );
 
     return auxString;
+    
   }
 }
 
