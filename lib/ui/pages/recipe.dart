@@ -144,34 +144,13 @@ class RecipePage extends StatelessWidget {
           ),
           Separator.cardSpacer(),
           CardPage(
-              title: 'ALLERGENS',
-              body: Column(
-                children: <Widget>[
-                  Column(
-                    children: _recipe.getTrueHealths
-                        .map((health) => _getHealthLabels(
-                              _recipe.getTrueHealths,
-                              health,
-                              true,
-                            ))
-                        .toList(),
-                  ),
-                  RowExpand(Column(
-                    children: <Widget>[
-                      Separator.spacer(),
-                      Column(
-                        children: _recipe.getFalseHealths
-                            .map((health) => _getHealthLabels(
-                                  _recipe.getFalseHealths,
-                                  health,
-                                  false,
-                                ))
-                            .toList(),
-                      ),
-                    ],
-                  )),
-                ],
-              )),
+            title: 'ALLERGENS',
+            body: Column(
+              children: _recipe.healths
+                  .map((health) => _getHealthLabels(_recipe.healths, health))
+                  .toList(),
+            ),
+          ),
         ],
       ),
     );
@@ -194,9 +173,9 @@ class RecipePage extends StatelessWidget {
     ]);
   }
 
-  Column _getHealthLabels(List healthLabels, String health, bool state) {
+  Column _getHealthLabels(List healthLabels, String health) {
     return Column(children: <Widget>[
-      RowItem.iconRow(health, state),
+      RowItem.iconRow(health, true),
       health != healthLabels.last ? Separator.spacer() : Separator.none(),
     ]);
   }
