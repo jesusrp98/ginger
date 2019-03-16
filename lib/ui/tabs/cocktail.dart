@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../models/cocktail.dart';
-import '../../widgets/hero_image.dart';
-import '../../widgets/list_cell.dart';
+import '../../widgets/card_scroll.dart';
+import '../../widgets/loading_indicator.dart';
 import '../../widgets/separator.dart';
-import '../pages/cocktail.dart';
 
 class CocktailTab extends StatelessWidget {
   @override
@@ -17,32 +16,40 @@ class CocktailTab extends StatelessWidget {
               centerTitle: true,
             ),
             body: model.isLoading
-                ? Text('LOADING...')
-                : ListView.separated(
-                    itemCount: model.getItemCount,
-                    separatorBuilder: (context, index) =>
-                        Separator.divider(height: 0, indent: 88),
-                    itemBuilder: (_, index) {
-                      final Cocktail cocktail = model.getItem(index);
-                      return ListCell(
-                        leading: ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(8)),
-                          child: HeroImage.list(
-                            url: cocktail.photo,
-                            tag: cocktail.name,
+                ? LoadingIndicator()
+                : ListView(children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Column(children: <Widget>[
+                        CardScroll(
+                          title: 'Gin',
+                          icon: Icon(
+                            Icons.picture_as_pdf,
+                            size: 27,
+                            color: Theme.of(context).textTheme.caption.color,
+                          ),
+                          children: model.items,
+                        ),
+                        Card(
+                          color: Colors.redAccent,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Row(children: <Widget>[
+                              Icon(Icons.warning, size: 56),
+                              Separator.spacer(width: 14),
+                              Expanded(
+                                child: Text(
+                                  'Remember not to drink if you\'re going to drive!',
+                                  textAlign: TextAlign.justify,
+                                  style: Theme.of(context).textTheme.title,
+                                ),
+                              )
+                            ]),
                           ),
                         ),
-                        title: cocktail.name,
-                        subtitle: cocktail.glassType,
-                        onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => CocktailPage(cocktail),
-                              ),
-                            ),
-                      );
-                    },
-                  ),
+                      ]),
+                    )
+                  ]),
           ),
     );
   }

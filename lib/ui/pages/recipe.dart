@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
-import 'package:ginger/widgets/expand_widget.dart';
 
 import '../../models/recipe.dart';
 import '../../widgets/card_page.dart';
