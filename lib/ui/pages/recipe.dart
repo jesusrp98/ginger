@@ -21,8 +21,8 @@ class RecipePage extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         children: <Widget>[
           HeadCardPage(
-            url: _recipe.photo,
             title: _recipe.name,
+            imageUrl: _recipe.photo,
             subtitle: InkResponse(
               child: Text(
                 'INSTRUCTIONS',

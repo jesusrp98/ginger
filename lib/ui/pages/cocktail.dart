@@ -20,8 +20,8 @@ class CocktailPage extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         children: <Widget>[
           HeadCardPage(
-            url: _cocktail.photo,
             title: _cocktail.name,
+            imageUrl: _cocktail.photo,
             subtitle: Text(
               _cocktail.getTag,
               style: Theme.of(context).textTheme.subhead.copyWith(

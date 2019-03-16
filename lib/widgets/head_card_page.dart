@@ -5,12 +5,15 @@ import 'hero_image.dart';
 import 'separator.dart';
 
 class HeadCardPage extends StatelessWidget {
-  final String url;
-  final String title;
-  final Widget subtitle;
-  final Widget body;
+  final String title, imageUrl;
+  final Widget subtitle, body;
 
-  HeadCardPage({this.url, this.title, this.subtitle, this.body});
+  HeadCardPage({
+    this.title,
+    this.imageUrl,
+    this.subtitle,
+    this.body,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +25,10 @@ class HeadCardPage extends StatelessWidget {
         child: Column(children: <Widget>[
           Row(children: <Widget>[
             HeroImage.card(
-              url: url,
+              url: imageUrl,
               tag: title,
               onTap: () async => await FlutterWebBrowser.openWebPage(
-                    url: url,
+                    url: imageUrl,
                     androidToolbarColor: Theme.of(context).primaryColor,
                   ),
             ),
