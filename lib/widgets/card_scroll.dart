@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 
 import '../ui/pages/cocktail.dart';
 import '../ui/pages/dialog_cocktails.dart';
-import 'hero_image.dart';
+import '../ui/pages/dialog_recipes.dart';
+import '../ui/pages/recipe.dart';
+import 'cache_image.dart';
 import 'separator.dart';
 
-class CardScroll extends StatelessWidget {
+class CocktailsScroll extends StatelessWidget {
   final String title;
-  final Widget icon;
   final List children;
 
-  CardScroll({this.title, this.icon, this.children});
+  CocktailsScroll({this.title, this.children});
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +24,12 @@ class CardScroll extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Row(children: <Widget>[
-                  icon,
-                  Separator.spacer(width: 14),
-                  Text(
-                    title,
-                    style: Theme.of(context).textTheme.subhead.copyWith(
-                          color: Theme.of(context).textTheme.caption.color,
-                        ),
-                  )
-                ]),
+                Text(
+                  title,
+                  style: Theme.of(context).textTheme.subhead.copyWith(
+                        color: Theme.of(context).textTheme.caption.color,
+                      ),
+                ),
                 InkResponse(
                   child: Text(
                     'MORE',
@@ -67,9 +64,10 @@ class CardScroll extends StatelessWidget {
                             ClipRRect(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(8)),
-                              child: HeroImage.list(
-                                url: cocktail.photo,
-                                tag: cocktail.name,
+                              child: SizedBox(
+                                width: 56.0,
+                                height: 56.0,
+                                child: CacheImage(cocktail.photo),
                               ),
                             ),
                             Separator.spacer(height: 8),
@@ -90,6 +88,100 @@ class CardScroll extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (_) => CocktailPage(cocktail),
+                                ),
+                              ),
+                        ),
+                      ))
+                  .toList(),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class RecipesScroll extends StatelessWidget {
+  final String title;
+  final List children;
+
+  RecipesScroll({this.title, this.children});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  title,
+                  style: Theme.of(context).textTheme.subhead.copyWith(
+                        color: Theme.of(context).textTheme.caption.color,
+                      ),
+                ),
+                InkResponse(
+                  child: Text(
+                    'MORE',
+                    style: Theme.of(context).textTheme.subhead.copyWith(
+                          color: Theme.of(context).accentColor,
+                        ),
+                  ),
+                  onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => RecipesDialog(
+                                title: title,
+                                recipes: children,
+                              ),
+                          fullscreenDialog: true,
+                        ),
+                      ),
+                )
+              ],
+            ),
+            Separator.spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: children
+                  .sublist(0, 4)
+                  .map((recipe) => Container(
+                        height: 91,
+                        width: 72,
+                        child: InkWell(
+                          child: Column(children: <Widget>[
+                            Separator.spacer(height: 8),
+                            ClipRRect(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
+                              child: SizedBox(
+                                width: 56.0,
+                                height: 56.0,
+                                child: CacheImage(recipe.photo),
+                              ),
+                            ),
+                            Separator.spacer(height: 8),
+                            Text(
+                              recipe.name,
+                              textAlign: TextAlign.center,
+                              overflow: TextOverflow.ellipsis,
+                              style:
+                                  Theme.of(context).textTheme.subhead.copyWith(
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .caption
+                                            .color,
+                                      ),
+                            )
+                          ]),
+                          onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => RecipePage(recipe),
                                 ),
                               ),
                         ),
