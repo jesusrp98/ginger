@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ginger/widgets/card_scroll.dart';
+import 'package:ginger/widgets/loading_indicator.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../models/home.dart';
@@ -17,34 +19,49 @@ class HomeTab extends StatelessWidget {
               title: const Text('Project: Ginger'),
               centerTitle: true,
             ),
-            body: model.isLoading
-                ? Center(child: Text('LOADING...'))
-                : ListView.separated(
-                    itemCount: model.getItemCount,
-                    separatorBuilder: (context, index) =>
-                        Separator.divider(height: 0, indent: 88),
-                    itemBuilder: (context, index) {
-                      final Recipe recipe = model.getItem(index);
-                      return ListCell(
-                        leading: ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(8)),
-                          child: HeroImage.list(
-                            url: recipe.photo,
-                            tag: recipe.name,
-                          ),
-                        ),
-                        title: recipe.name,
-                        subtitle: 'Serves ' + recipe.getPeople,
-                        onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => RecipePage(recipe),
-                              ),
-                            ),
-                      );
-                    },
-                  ),
-          ),
+        body: model.isLoading
+            ? LoadingIndicator()
+            : ListView(children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Column(children: <Widget>[
+              RecipesScroll(
+                title: 'Balanced',
+                children: model.balanced,
+              ),
+              RecipesScroll(
+                title: 'High Proteins',
+                children: model.proteins,
+              ),
+              RecipesScroll(
+                title: 'Low Fat',
+                children: model.fat,
+              ),
+              RecipesScroll(
+                title: 'Low Carb',
+                children: model.carb,
+              ),
+              Card(
+                color: Colors.redAccent,
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(children: <Widget>[
+                    Icon(Icons.warning, size: 56),
+                    Separator.spacer(width: 14),
+                    Expanded(
+                      child: Text(
+                        'Remember not to eat too much!',
+                        textAlign: TextAlign.justify,
+                        style: Theme.of(context).textTheme.title,
+                      ),
+                    )
+                  ]),
+                ),
+              ),
+            ]),
+          )
+        ]),
+      ),
     );
   }
 }
