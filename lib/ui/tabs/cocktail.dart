@@ -21,14 +21,25 @@ class CocktailTab extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8),
                       child: Column(children: <Widget>[
-                        CardScroll(
+                        CocktailsScroll(
+                          title: 'Vodka',
+                          children: model.vodkas,
+                        ),
+                        CocktailsScroll(
                           title: 'Gin',
-                          icon: Icon(
-                            Icons.picture_as_pdf,
-                            size: 27,
-                            color: Theme.of(context).textTheme.caption.color,
-                          ),
-                          children: model.items,
+                          children: model.gins,
+                        ),
+                        CocktailsScroll(
+                          title: 'Rum',
+                          children: model.rums,
+                        ),
+                        CocktailsScroll(
+                          title: 'Tequila',
+                          children: model.tequilas,
+                        ),
+                        CocktailsScroll(
+                          title: 'Wine',
+                          children: model.wines,
                         ),
                         Card(
                           color: Colors.redAccent,

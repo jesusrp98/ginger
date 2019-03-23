@@ -6,20 +6,45 @@ import '../util/url.dart';
 import 'query.dart';
 
 class CocktailModel extends QueryModel {
+  // Aux variales
+  var _auxResponse;
+  var _auxSnapshot;
+  List _auxList;
+
   @override
   Future loadData() async {
-    response = await http.get(Url.sampleCocktail);
-    snapshot = json.decode(response.body);
+    // Loads all cocktails containing a specific ingredient
+    for (String url in Url.sampleCocktails) {
+      _auxList = List();
+      response = await http.get(url);
+      snapshot = await json.decode(response.body);
 
-    // For demo purposes
-    print(snapshot);
+      // Loads each specific cocktail from its id
+      for (var baseCocktail in snapshot['drinks']) {
+        _auxResponse = await http.get(
+          Url.cocktailBaseUrl + baseCocktail['idDrink'],
+        );
+        _auxSnapshot = await json.decode(_auxResponse.body);
 
-    items.addAll(
-      snapshot['drinks'].map((recipe) => Cocktail.fromJson(recipe)).toList(),
-    );
-
+        // Adds that drink to an aux list
+        _auxList.add(Cocktail.fromJson(_auxSnapshot['drinks'][0]));
+      }
+      // Adds that aux list to the main list
+      items.add(_auxList);
+    }
     setLoading(false);
   }
+
+  // Getters which retrieves a specific cocktails list
+  List get vodkas => getItem(0);
+
+  List get gins => getItem(1);
+
+  List get rums => getItem(2);
+
+  List get tequilas => getItem(3);
+
+  List get wines => getItem(4);
 }
 
 class Cocktail {
