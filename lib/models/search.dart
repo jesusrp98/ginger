@@ -6,30 +6,43 @@ import 'query.dart';
 import 'recipe.dart';
 
 final Map<String, dynamic> dietStrings = {
-  "diet_type": {
-    "Balanced": "balanced",
-    "High protein": "high-protein",
-    "High fiber": "high-fiber",
-    "Low fat": "low-fat",
-    "Low carb": "low-carb",
-    "Low sodium": "low-sodium"
-  },
-  "diet_properties": {
-    "Vegan": "vegan",
-    "Vegetarian": "vegetarian",
-    "paleo": "paleo",
-    "Dairy free": "dairy-free",
-    "Gluten free": "gluten-free",
-    "Weat free": "wheat-free",
-    "Fat free": "fat-free",
-    "Low sugar": "low-sugar",
-    "Egg free": "egg-free",
-    "Peanut free": "peanut-free",
-    "Tree nut free": "tree-nut-free",
-    "Soy free": "soy-free",
-    "Fish free": "fish-free",
-    "Shellfish free": "shellfish-free"
-  }
+  "diet_type": [
+    "balanced",
+    "high-protein",
+    "high-fiber",
+    "low-fat",
+    "low-carb",
+    "low-sodium"
+  ],
+  "health_labels": [
+    "alcohol-free",
+    "celery-free",
+    "crustacean-free",
+    "dairy-free",
+    "egg-free",
+    "fish-free",
+    "gluten-free",
+    "kidney-friendly",
+    "kosher",
+    "low-potassium",
+    "lupine-free",
+    "mustard-free",
+    "No-oil-added",
+    "low-sugar",
+    "paleo",
+    "peanut-free",
+    "pescatarian",
+    "pork-free",
+    "red-meat-free",
+    "sesame-free",
+    "shellfish-free",
+    "soy-free",
+    "sugar-conscious",
+    "tree-nut-free",
+    "vegan",
+    "vegetarian",
+    "wheat-free"
+  ]
 };
 
 class SearchModel extends QueryModel {
@@ -37,7 +50,7 @@ class SearchModel extends QueryModel {
   bool _success = true;
 
   @override
-  Future loadData() {
+  Future loadData() async {
     setLoading(false);
   }
 
@@ -63,17 +76,17 @@ class SearchModel extends QueryModel {
 
   bool get onSuccess => _success;
 
-  void setFilterCalories(num calories) {
+  void setFilterCalories(List<int> calories) {
     filter.totalCalories = calories;
     notifyListeners();
   }
 
-  void setFilterDietProperties(String dietType) {
+  void setFilterDietType(String dietType) {
     filter.dietType = dietType;
     notifyListeners();
   }
 
-  void setFilterDietType(String dietProperties) {
+  void setFilterDietProperties(String dietProperties) {
     filter.dietProperties = dietProperties;
     notifyListeners();
   }
@@ -90,7 +103,7 @@ class SearchModel extends QueryModel {
 }
 
 class SearchFilter {
-  num totalCalories;
+  List<int> totalCalories;
   String dietType;
   String dietProperties;
   num time;
@@ -106,7 +119,7 @@ class SearchFilter {
 
   factory SearchFilter.init() {
     return SearchFilter(
-      totalCalories: 2000,
+      totalCalories: [50, 150],
       dietType: 'balanced',
       dietProperties: 'low-sugar',
       time: 30,
@@ -114,9 +127,10 @@ class SearchFilter {
     );
   }
 
-  String get getCalories => '${totalCalories.toString()} kcal';
+  String get getCalories =>
+      '${totalCalories[0].toString()}-${totalCalories[1].toString()} kcal';
 
   String get getTime => '$time min';
 
-  String get getIngredients => '$ingredients ingredients';
+  String get getIngredients => 'Max $ingredients ingredients';
 }

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -22,15 +20,22 @@ class SearchFiltersPage extends StatelessWidget {
                   onTap: () => Picker(
                         adapter: NumberPickerAdapter(data: [
                           NumberPickerColumn(
-                            begin: 500,
-                            end: 10000,
-                            initValue: 0,
+                            begin: 50,
+                            end: 500,
+                            jump: 50,
+                            initValue: model.filter.totalCalories[0],
+                          ),
+                          NumberPickerColumn(
+                            begin: 50,
+                            end: 500,
+                            jump: 50,
+                            initValue: model.filter.totalCalories[1],
                           ),
                         ]),
                         hideHeader: true,
                         title: Text('Calories', textAlign: TextAlign.center),
                         onConfirm: (picker, list) =>
-                            model.setFilterCalories(list[0]),
+                            model.setFilterCalories(picker.getSelectedValues()),
                         confirmText: 'OK',
                         cancelText: 'CANCEL',
                       ).showDialog(context),
@@ -42,14 +47,13 @@ class SearchFiltersPage extends StatelessWidget {
                   trailing: Icon(Icons.chevron_right),
                   onTap: () => Picker(
                         adapter: PickerDataAdapter<String>(
-                          data: JsonDecoder()
-                              .convert(dietStrings['diet_type'])
-                              .keys,
+                          pickerdata: dietStrings['diet_type'],
                         ),
                         hideHeader: true,
                         title: Text('Diet type', textAlign: TextAlign.center),
-                        onConfirm: (picker, list) =>
-                            model.setFilterDietType(list[0].toString()),
+                        onConfirm: (picker, list) => model.setFilterDietType(
+                              picker.getSelectedValues()[0],
+                            ),
                         confirmText: 'OK',
                         cancelText: 'CANCEL',
                       ).showDialog(context),
@@ -61,15 +65,17 @@ class SearchFiltersPage extends StatelessWidget {
                   trailing: Icon(Icons.chevron_right),
                   onTap: () => Picker(
                         adapter: PickerDataAdapter<String>(
-                          data: JsonDecoder()
-                              .convert(dietStrings['diet_properties'])
-                              .keys,
+                          pickerdata: dietStrings['health_labels'],
                         ),
                         hideHeader: true,
-                        title: Text('Diet properties',
-                            textAlign: TextAlign.center),
+                        title: Text(
+                          'Diet properties',
+                          textAlign: TextAlign.center,
+                        ),
                         onConfirm: (picker, list) =>
-                            model.setFilterDietProperties(list[0].toString()),
+                            model.setFilterDietProperties(
+                              picker.getSelectedValues()[0],
+                            ),
                         confirmText: 'OK',
                         cancelText: 'CANCEL',
                       ).showDialog(context),
@@ -81,12 +87,17 @@ class SearchFiltersPage extends StatelessWidget {
                   trailing: Icon(Icons.chevron_right),
                   onTap: () => Picker(
                         adapter: NumberPickerAdapter(data: [
-                          NumberPickerColumn(begin: 10, end: 180, initValue: 0),
+                          NumberPickerColumn(
+                            begin: 10,
+                            end: 180,
+                            jump: 10,
+                            initValue: model.filter.time,
+                          ),
                         ]),
                         hideHeader: true,
                         title: Text('Duration', textAlign: TextAlign.center),
                         onConfirm: (picker, list) =>
-                            model.setFilterTime(list[0]),
+                            model.setFilterTime(picker.getSelectedValues()[0]),
                         confirmText: 'OK',
                         cancelText: 'CANCEL',
                       ).showDialog(context),
@@ -98,12 +109,17 @@ class SearchFiltersPage extends StatelessWidget {
                   trailing: Icon(Icons.chevron_right),
                   onTap: () => Picker(
                         adapter: NumberPickerAdapter(data: [
-                          NumberPickerColumn(begin: 1, end: 10, initValue: 0),
+                          NumberPickerColumn(
+                            begin: 1,
+                            end: 10,
+                            initValue: model.filter.ingredients,
+                          ),
                         ]),
                         hideHeader: true,
                         title: Text('Ingredients', textAlign: TextAlign.center),
-                        onConfirm: (picker, list) =>
-                            model.setFilterIngredients(list[0]),
+                        onConfirm: (picker, list) => model.setFilterIngredients(
+                              picker.getSelectedValues()[0],
+                            ),
                         confirmText: 'OK',
                         cancelText: 'CANCEL',
                       ).showDialog(context),
