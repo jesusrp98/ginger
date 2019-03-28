@@ -102,29 +102,37 @@ class RecipePage extends StatelessWidget {
                   _recipe.getDiet,
                 ),
                 Separator.divider(),
-                RowItem.textRow(
-                  context,
-                  _recipe.sugar.getLabel,
-                  _recipe.sugar.getInfo,
-                ),
+                _recipe.sugar != null
+                    ? RowItem.textRow(
+                        context,
+                        _recipe.sugar.getLabel,
+                        _recipe.sugar.getInfo,
+                      )
+                    : Separator.none(),
                 Separator.spacer(),
-                RowItem.textRow(
-                  context,
-                  _recipe.fat.getLabel,
-                  _recipe.fat.getInfo,
-                ),
+                _recipe.fat != null
+                    ? RowItem.textRow(
+                        context,
+                        _recipe.fat.getLabel,
+                        _recipe.fat.getInfo,
+                      )
+                    : Separator.none(),
                 Separator.spacer(),
-                RowItem.textRow(
-                  context,
-                  _recipe.cholesterol.getLabel,
-                  _recipe.cholesterol.getInfo,
-                ),
+                _recipe.cholesterol != null
+                    ? RowItem.textRow(
+                        context,
+                        _recipe.cholesterol.getLabel,
+                        _recipe.cholesterol.getInfo,
+                      )
+                    : Separator.none(),
                 Separator.spacer(),
-                RowItem.textRow(
-                  context,
-                  _recipe.proteins.getLabel,
-                  _recipe.proteins.getInfo,
-                ),
+                _recipe.proteins != null
+                    ? RowItem.textRow(
+                        context,
+                        _recipe.proteins.getLabel,
+                        _recipe.proteins.getInfo,
+                      )
+                    : Separator.none(),
               ],
             ),
           ),
