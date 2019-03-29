@@ -1,7 +1,6 @@
-import 'dart:convert';
+import 'package:dio/dio.dart';
 
-import 'package:http/http.dart' as http;
-
+import '../util/url.dart';
 import 'query.dart';
 import 'recipe.dart';
 
@@ -50,26 +49,31 @@ class SearchModel extends QueryModel {
   bool _success = true;
 
   @override
-  Future loadData() async {
-    setLoading(false);
-  }
+  Future loadData() async => setLoading(false);
 
   void fetchQuery(String query) async {
-    final String url =
-        'https://api.edamam.com/search?q=$query&app_id=541602a7&app_key=dc6e03b02796720e83b437f67e6074db&to=20';
-    List _result;
-
     setLoading(true);
-    response = await http.get(url);
-    snapshot = json.decode(response.body);
+
+    var response0 = await Dio().get(Url.recipesSearch, queryParameters: {
+      'q': query,
+      'app_id': '541602a7',
+      'app_key': 'dc6e03b02796720e83b437f67e6074db',
+      'calories': filter.getCalories,
+      'ingr': filter.ingredients,
+      'diet': filter.dietType,
+      'health': filter.dietProperties,
+      'time': filter.time
+    });
+
+    List result = response0.data['hits'];
 
     clearItems();
-    _result = snapshot['hits'];
 
     items.addAll(
-        _result.map((recipe) => Recipe.fromJson(recipe['recipe'])).toList());
+      result.map((recipe) => Recipe.fromJson(recipe['recipe'])).toList(),
+    );
 
-    _success = _result.isNotEmpty;
+    _success = items.isNotEmpty;
 
     setLoading(false);
   }
@@ -121,14 +125,16 @@ class SearchFilter {
     return SearchFilter(
       totalCalories: [50, 150],
       dietType: 'balanced',
-      dietProperties: 'low-sugar',
+      dietProperties: 'sugar-conscious',
       time: 30,
       ingredients: 2,
     );
   }
 
   String get getCalories =>
-      '${totalCalories[0].toString()}-${totalCalories[1].toString()} kcal';
+      '${totalCalories[0].toString()}-${totalCalories[1].toString()}';
+
+  String get displayCalories => '$getCalories kcal';
 
   String get getTime => '$time min';
 

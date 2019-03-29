@@ -84,14 +84,15 @@ class SearchTab extends StatelessWidget {
                       separatorBuilder: (context, index) => Divider(),
                       itemBuilder: (context, index) {
                         final Recipe recipe = model.getItem(index);
-                        return ListTile(
-                          leading: SizedBox(
-                            height: 64,
-                            width: 64,
-                            child: Image.network(recipe.photo),
+                        return ListCell(
+                          leading: ClipRRect(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                            child: HeroImage.list(
+                              url: recipe.photo,
+                              tag: recipe.name,
+                            ),
                           ),
-                          title: Text(recipe.name),
-                          subtitle: Text(recipe.servs.toString()),
+                          title: recipe.name,
                           onTap: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
