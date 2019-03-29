@@ -15,7 +15,20 @@ class RecipePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(_recipe.name), centerTitle: true),
+      appBar: AppBar(
+        title: Text(_recipe.name),
+        centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.share),
+            tooltip: 'Share recipe',
+            onPressed: () async => await FlutterWebBrowser.openWebPage(
+                  url: _recipe.shareUrl,
+                  androidToolbarColor: Theme.of(context).primaryColor,
+                ),
+          )
+        ],
+      ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: <Widget>[
@@ -87,7 +100,7 @@ class RecipePage extends StatelessWidget {
           ),
           Separator.cardSpacer(),
           CardPage(
-            title: 'nutritionalValuesRITIONAL VALUES',
+            title: 'NUTRITIONAL VALUES',
             body: Column(
               children: <Widget>[
                 RowItem.textRow(

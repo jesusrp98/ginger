@@ -12,29 +12,15 @@ final Map<String, dynamic> dietStrings = {
     "low-sodium"
   ],
   "health_labels": [
-    "alcohol-free",
-    "celery-free",
-    "crustacean-free",
     "dairy-free",
     "egg-free",
     "fish-free",
     "gluten-free",
-    "kidney-friendly",
-    "kosher",
-    "low-potassium",
-    "lupine-free",
-    "mustard-free",
-    "No-oil-added",
     "low-sugar",
     "paleo",
     "peanut-free",
-    "pescatarian",
-    "pork-free",
-    "red-meat-free",
-    "sesame-free",
     "shellfish-free",
     "soy-free",
-    "sugar-conscious",
     "tree-nut-free",
     "vegan",
     "vegetarian",
@@ -62,7 +48,7 @@ class SearchModel extends QueryModel {
       'calories': filter.getCalories,
       'ingr': filter.ingredients,
       'diet': filter.dietType,
-      'health': filter.dietProperties,
+      'healt': filter.dietProperties,
       'time': filter.time
     });
 
@@ -126,7 +112,7 @@ class SearchFilter {
     return SearchFilter(
       totalCalories: [50, 150],
       dietType: 'balanced',
-      dietProperties: 'sugar-conscious',
+      dietProperties: 'low-sugar',
       time: 30,
       ingredients: 10,
     );

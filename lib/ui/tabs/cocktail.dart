@@ -21,6 +21,29 @@ class CocktailTab extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(16),
                       child: Column(children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Icon(
+                              Icons.local_bar,
+                              size: 56,
+                              color: Theme.of(context).textTheme.caption.color,
+                            ),
+                            Separator.spacer(width: 16),
+                            Expanded(
+                              child: Text(
+                                'Take a look at this recommended cocktails!',
+                                style:
+                                    Theme.of(context).textTheme.title.copyWith(
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .caption
+                                              .color,
+                                        ),
+                              ),
+                            )
+                          ],
+                        ),
+                        Separator.divider(),
                         CocktailsScroll(
                           title: 'Vodka',
                           children: model.vodkas,
