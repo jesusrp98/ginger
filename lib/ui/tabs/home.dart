@@ -31,7 +31,7 @@ class HomeTab extends StatelessWidget {
                             Separator.spacer(width: 16),
                             Expanded(
                               child: Text(
-                                'Take a look at this recommended recipes!',
+                                'Take a look at the recommended recipes!',
                                 style:
                                     Theme.of(context).textTheme.title.copyWith(
                                           color: Theme.of(context)
@@ -44,22 +44,26 @@ class HomeTab extends StatelessWidget {
                           ],
                         ),
                         Separator.divider(),
-                        RecipesScroll(
+                        CardScroll.recipe(
+                          context: context,
                           title: 'Balanced',
                           children: model.balanced,
                         ),
                         Separator.cardSpacer(),
-                        RecipesScroll(
+                        CardScroll.recipe(
+                          context: context,
                           title: 'High Proteins',
                           children: model.proteins,
                         ),
                         Separator.cardSpacer(),
-                        RecipesScroll(
+                        CardScroll.recipe(
+                          context: context,
                           title: 'Low Fat',
                           children: model.fat,
                         ),
                         Separator.cardSpacer(),
-                        RecipesScroll(
+                        CardScroll.recipe(
+                          context: context,
                           title: 'Low Carb',
                           children: model.carb,
                         ),

@@ -31,7 +31,7 @@ class CocktailTab extends StatelessWidget {
                             Separator.spacer(width: 16),
                             Expanded(
                               child: Text(
-                                'Take a look at this recommended cocktails!',
+                                'Take a look at the recommended cocktails!',
                                 style:
                                     Theme.of(context).textTheme.title.copyWith(
                                           color: Theme.of(context)
@@ -44,27 +44,32 @@ class CocktailTab extends StatelessWidget {
                           ],
                         ),
                         Separator.divider(),
-                        CocktailsScroll(
+                        CardScroll.cocktail(
+                          context: context,
                           title: 'Vodka',
                           children: model.vodkas,
                         ),
                         Separator.cardSpacer(),
-                        CocktailsScroll(
+                        CardScroll.cocktail(
+                          context: context,
                           title: 'Gin',
                           children: model.gins,
                         ),
                         Separator.cardSpacer(),
-                        CocktailsScroll(
+                        CardScroll.cocktail(
+                          context: context,
                           title: 'Rum',
                           children: model.rums,
                         ),
                         Separator.cardSpacer(),
-                        CocktailsScroll(
+                        CardScroll.cocktail(
+                          context: context,
                           title: 'Tequila',
                           children: model.tequilas,
                         ),
                         Separator.cardSpacer(),
-                        CocktailsScroll(
+                        CardScroll.cocktail(
+                          context: context,
                           title: 'Wine',
                           children: model.wines,
                         ),
