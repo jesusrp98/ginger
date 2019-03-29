@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../models/cocktail.dart';
+import '../../widgets/card_scroll.dart';
+import '../../widgets/loading_indicator.dart';
+import '../../widgets/separator.dart';
 
 class CocktailTab extends StatelessWidget {
   @override
@@ -13,23 +16,51 @@ class CocktailTab extends StatelessWidget {
               centerTitle: true,
             ),
             body: model.isLoading
-                ? Text('LOADING...')
-                : ListView.separated(
-                    itemCount: model.getItemCount,
-                    itemBuilder: (_, index) {
-                      final Cocktail cocktail = model.getItem(index);
-                      return ListTile(
-                        leading: SizedBox(
-                          height: 64,
-                          width: 64,
-                          child: Image.network(cocktail.photo),
+                ? LoadingIndicator()
+                : ListView(children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Column(children: <Widget>[
+                        CocktailsScroll(
+                          title: 'Vodka',
+                          children: model.vodkas,
                         ),
-                        title: Text(cocktail.name),
-                        subtitle: Text(cocktail.glassType),
-                      );
-                    },
-                    separatorBuilder: (_, index) => Divider(),
-                  ),
+                        CocktailsScroll(
+                          title: 'Gin',
+                          children: model.gins,
+                        ),
+                        CocktailsScroll(
+                          title: 'Rum',
+                          children: model.rums,
+                        ),
+                        CocktailsScroll(
+                          title: 'Tequila',
+                          children: model.tequilas,
+                        ),
+                        CocktailsScroll(
+                          title: 'Wine',
+                          children: model.wines,
+                        ),
+                        Card(
+                          color: Colors.redAccent,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Row(children: <Widget>[
+                              Icon(Icons.warning, size: 56),
+                              Separator.spacer(width: 14),
+                              Expanded(
+                                child: Text(
+                                  'Remember not to drink if you\'re going to drive!',
+                                  textAlign: TextAlign.justify,
+                                  style: Theme.of(context).textTheme.title,
+                                ),
+                              )
+                            ]),
+                          ),
+                        ),
+                      ]),
+                    )
+                  ]),
           ),
     );
   }

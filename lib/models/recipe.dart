@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class Recipe {
   final String name, photo, url, shareUrl, source;
   final List healths, ingredients, diets;
@@ -37,18 +39,55 @@ class Recipe {
       calories: json['calories'],
       weight: json['totalWeight'],
       time: json['totalTime'],
-      // sugar: NutritionalValue.fromJson(json['totalNutrients']['SUGAR']),
-      // fat: NutritionalValue.fromJson(json['totalNutrients']['FAT']),
-      // cholesterol: NutritionalValue.fromJson(json['totalNutrients']['CHOLE']),
-      // proteins: NutritionalValue.fromJson(json['totalNutrients']['PROCNT']),
+      sugar: setNutritionalValue(json['totalNutrients']['SUGAR']),
+      fat: setNutritionalValue(json['totalNutrients']['FAT']),
+      cholesterol: setNutritionalValue(json['totalNutrients']['CHOLE']),
+      proteins: setNutritionalValue(json['totalNutrients']['PROCNT']),
     );
+  }
+
+  static NutritionalValue setNutritionalValue(
+    Map<String, dynamic> nutritionalValue,
+  ) {
+    try {
+      return NutritionalValue.fromJson(nutritionalValue);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  String get getCalories => '${calories.round()} kcal';
+
+  String get getPeople =>
+      '${NumberFormat.decimalPattern().format(servs)} ${servs == 1 ? 'person' : 'people'}';
+
+  String get getPreparationTime {
+    if (time < 60)
+      return '${NumberFormat.decimalPattern().format(time)} min';
+    else
+      return '${NumberFormat.decimalPattern().format(time / 60)} h';
+  }
+
+  bool get isVegetarian => hasLabel('Vegeterian');
+
+  bool get isVegan => hasLabel('Vegan');
+
+  bool hasLabel(String label) => healths.contains(label);
+
+  String get getDiet {
+    String auxString = '';
+
+    healths.forEach(
+      (item) => auxString += item + ((healths.last == item) ? '' : '\n'),
+    );
+
+    return auxString;
   }
 }
 
 class NutritionalValue {
-  final String label;
+  final String label, unit;
   final double quantity;
-  final String unit;
 
   NutritionalValue({this.label, this.quantity, this.unit});
 
@@ -59,4 +98,8 @@ class NutritionalValue {
       unit: json['unit'],
     );
   }
+
+  String get getLabel => label ?? 'Unknown';
+
+  String get getInfo => '${quantity.round()} $unit';
 }

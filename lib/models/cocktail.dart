@@ -1,64 +1,111 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
-import '../util/url.dart';
 
+import 'package:http/http.dart' as http;
+
+import '../util/url.dart';
 import 'query.dart';
 
 class CocktailModel extends QueryModel {
+  // Aux variales
+  var _auxResponse;
+  var _auxSnapshot;
+  List _auxList;
+
   @override
   Future loadData() async {
-    response = await http.get(Url.sampleCocktail);
-    snapshot = json.decode(response.body);
+    // Loads all cocktails containing a specific ingredient
+    for (String url in Url.sampleCocktails) {
+      _auxList = List();
+      response = await http.get(url);
+      snapshot = await json.decode(response.body);
 
-    // For demo purposes
-    print(snapshot);
+      // Loads each specific cocktail from its id
+      for (var baseCocktail in snapshot['drinks']) {
+        _auxResponse = await http.get(
+          Url.cocktailBaseUrl + baseCocktail['idDrink'],
+        );
+        _auxSnapshot = await json.decode(_auxResponse.body);
 
-    items.addAll(
-      snapshot['drinks'].map((recipe) => Cocktail.fromJson(recipe)).toList(),
-    );
-
+        // Adds that drink to an aux list
+        _auxList.add(Cocktail.fromJson(_auxSnapshot['drinks'][0]));
+      }
+      // Adds that aux list to the main list
+      items.add(_auxList);
+    }
     setLoading(false);
   }
+
+  // Getters which retrieves a specific cocktails list
+  List get vodkas => getItem(0);
+
+  List get gins => getItem(1);
+
+  List get rums => getItem(2);
+
+  List get tequilas => getItem(3);
+
+  List get wines => getItem(4);
 }
 
 class Cocktail {
-  final String name, category, glassType, instruction, photo, tag;
-  final List ingredients, measures;
+  final String name, tag, glassType, instructions, photo;
+  final List<CocktailIngredient> ingredients;
   final bool isAlcoholic;
 
   Cocktail({
     this.name,
-    this.category,
     this.tag,
     this.glassType,
-    this.instruction,
+    this.instructions,
     this.photo,
     this.ingredients,
-    this.measures,
     this.isAlcoholic,
   });
 
   factory Cocktail.fromJson(Map<String, dynamic> json) {
     return Cocktail(
       name: json['strDrink'],
-      category: json['strCategory'],
       tag: json['strIBA'],
-      isAlcoholic: json['strAlcoholic'] == 'Alcoholic',
       glassType: json['strGlass'],
-      instruction: json['strInstruction'],
+      isAlcoholic: json['strAlcoholic'] == 'Alcoholic',
+      instructions: json['strInstructions'],
       photo: json['strDrinkThumb'],
       ingredients: [
-        json['strIngredient1'],
-        json['strIngredient2'],
-        json['strIngredient3'],
-        json['strIngredient4'],
-      ],
-      measures: [
-        json['strMeasure1'],
-        json['strMeasure2'],
-        json['strMeasure3'],
-        json['strMeasure4'],
+        CocktailIngredient(
+          name: json['strIngredient1'],
+          measure: json['strMeasure1'],
+        ),
+        CocktailIngredient(
+          name: json['strIngredient2'],
+          measure: json['strMeasure2'],
+        ),
+        CocktailIngredient(
+          name: json['strIngredient3'],
+          measure: json['strMeasure3'],
+        ),
+        CocktailIngredient(
+          name: json['strIngredient4'],
+          measure: json['strMeasure4'],
+        ),
       ],
     );
   }
+
+  String get getTag => tag ?? 'Unknown';
+
+  String get getGlass => glassType ?? 'Unknown';
+
+  String get getInstructions =>
+      instructions ?? 'There are no instructions provided';
+
+  List get getIngredients => ingredients
+    ..removeWhere((CocktailIngredient ingredient) => ingredient.name == null);
+}
+
+class CocktailIngredient {
+  final String name, measure;
+
+  CocktailIngredient({this.name, this.measure});
+
+  String get getMeasure => measure.isNotEmpty ? measure : '-';
 }
