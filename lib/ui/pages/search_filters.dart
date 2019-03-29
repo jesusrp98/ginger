@@ -15,7 +15,7 @@ class SearchFiltersPage extends StatelessWidget {
               children: <Widget>[
                 ListTile(
                   title: Text('Total calories'),
-                  subtitle: Text(model.filter.getCalories),
+                  subtitle: Text(model.filter.displayCalories),
                   trailing: Icon(Icons.chevron_right),
                   onTap: () => Picker(
                         adapter: NumberPickerAdapter(data: [

@@ -5,4 +5,6 @@ class Url {
 
   static const String sampleCocktail =
       'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita';
+
+  static const String recipesSearch = 'https://api.edamam.com/search';
 }
