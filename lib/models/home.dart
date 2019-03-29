@@ -1,28 +1,28 @@
-import 'dart:convert';
-
-import 'package:http/http.dart' as http;
-
 import '../util/url.dart';
 import 'query.dart';
 import 'recipe.dart';
 
+/// HOME MODEL
+/// This model contais all recipes the app offers
+/// to its user by default, like balanced or low-fat recipes.
 class HomeModel extends QueryModel {
-  List _auxList;
+  List _auxList = List();
+
   @override
   Future loadData() async {
+    // Loads all recipes from a single URL
     for (String url in Url.sampleRecipes) {
-      _auxList = List();
-      response = await http.get(url);
-      snapshot = json.decode(response.body);
+      // Fetch recipes from the URL
+      Map recipes = await fetchData(url);
+      _auxList.clear();
 
-      // Loads each specific cocktail from its id
-      for (var baseRecipe in snapshot['hits']) {
-        // Adds that drink to an aux list
-        _auxList.add(Recipe.fromJson(baseRecipe['recipe']));
-       }
+      // Adds all fetched recipes to an aux list
+      for (Map recipe in recipes['hits'])
+        _auxList.add(Recipe.fromJson(recipe['recipe']));
+
+      // Adds that aux list to the main list
       items.add(_auxList);
     }
-    // Adds that aux list to the main list
     setLoading(false);
   }
 
@@ -33,5 +33,4 @@ class HomeModel extends QueryModel {
   List get fat => getItem(2);
 
   List get carb => getItem(3);
-
 }

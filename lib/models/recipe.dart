@@ -1,5 +1,8 @@
 import 'package:intl/intl.dart';
 
+/// RECIPE MODEL
+/// This model holds all info about a specific model.
+/// It includes name, image, nutritional values...
 class Recipe {
   final String name, photo, url, shareUrl, source;
   final List healths, ingredients, diets;
@@ -60,6 +63,8 @@ class Recipe {
 
   String get getPeople =>
       '${NumberFormat.decimalPattern().format(servs)} ${servs == 1 ? 'person' : 'people'}';
+  
+  String get displayPeople => 'For $getPeople';
 
   String get getPreparationTime {
     if (time < 60)
@@ -85,6 +90,9 @@ class Recipe {
   }
 }
 
+/// NUTRITIONAL VALUE
+/// This model holds information about a specific nut. value,
+/// like its name, unit & quantity.
 class NutritionalValue {
   final String label, unit;
   final double quantity;

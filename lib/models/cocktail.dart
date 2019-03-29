@@ -1,33 +1,29 @@
-import 'dart:convert';
-
-import 'package:http/http.dart' as http;
-
 import '../util/url.dart';
 import 'query.dart';
 
+/// COCKTAIL MODEL
+/// This model contais all cocktails the app offers
+/// to its user by default, like vodka or rum drinks.
 class CocktailModel extends QueryModel {
-  // Aux variales
-  var _auxResponse;
-  var _auxSnapshot;
-  List _auxList;
+  List _auxList = List();
 
   @override
   Future loadData() async {
     // Loads all cocktails containing a specific ingredient
     for (String url in Url.sampleCocktails) {
-      _auxList = List();
-      response = await http.get(url);
-      snapshot = await json.decode(response.body);
+      // Fetch cocktail from the URL
+      Map cocktails = await fetchData(url);
+      _auxList.clear();
 
       // Loads each specific cocktail from its id
-      for (var baseCocktail in snapshot['drinks']) {
-        _auxResponse = await http.get(
-          Url.cocktailBaseUrl + baseCocktail['idDrink'],
+      for (Map baseCocktail in cocktails['drinks']) {
+        Map cocktail = await fetchData(
+          Url.cocktailBaseUrl,
+          parameters: {'i': baseCocktail['idDrink']},
         );
-        _auxSnapshot = await json.decode(_auxResponse.body);
 
-        // Adds that drink to an aux list
-        _auxList.add(Cocktail.fromJson(_auxSnapshot['drinks'][0]));
+        // Adds that cocktail to an aux list
+        _auxList.add(Cocktail.fromJson(cocktail['drinks'][0]));
       }
       // Adds that aux list to the main list
       items.add(_auxList);

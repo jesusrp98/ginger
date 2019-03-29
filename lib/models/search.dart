@@ -1,5 +1,3 @@
-import 'package:dio/dio.dart';
-
 import '../util/url.dart';
 import 'query.dart';
 import 'recipe.dart';
@@ -44,6 +42,9 @@ final Map<String, dynamic> dietStrings = {
   ]
 };
 
+/// SEARCH MODEL
+/// This model allows users to use the Search feature.
+/// It can filter the search result as well.
 class SearchModel extends QueryModel {
   SearchFilter filter = SearchFilter.init();
   bool _success = true;
@@ -54,7 +55,7 @@ class SearchModel extends QueryModel {
   void fetchQuery(String query) async {
     setLoading(true);
 
-    var response0 = await Dio().get(Url.recipesSearch, queryParameters: {
+    Map result = await fetchData(Url.recipesSearch, parameters: {
       'q': query,
       'app_id': '541602a7',
       'app_key': 'dc6e03b02796720e83b437f67e6074db',
@@ -65,12 +66,12 @@ class SearchModel extends QueryModel {
       'time': filter.time
     });
 
-    List result = response0.data['hits'];
-
     clearItems();
 
     items.addAll(
-      result.map((recipe) => Recipe.fromJson(recipe['recipe'])).toList(),
+      result['hints']
+          .map((recipe) => Recipe.fromJson(recipe['recipe']))
+          .toList(),
     );
 
     _success = items.isNotEmpty;
@@ -127,7 +128,7 @@ class SearchFilter {
       dietType: 'balanced',
       dietProperties: 'sugar-conscious',
       time: 30,
-      ingredients: 2,
+      ingredients: 10,
     );
   }
 

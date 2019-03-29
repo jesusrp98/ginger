@@ -1,32 +1,41 @@
-import 'dart:async';
-
+import 'package:dio/dio.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+/// QUERY MODEL
+/// General model used to help retrieve, parse & storage
+/// information from a public API
 abstract class QueryModel extends Model {
   List _items = List();
-
-  var snapshot;
-  var response;
+  List _photos = List();
 
   bool _loading = true;
 
-  Future refresh() async {
-    await loadData();
-    notifyListeners();
-  }
-
-  void setLoading(bool state) {
+  setLoading(bool state) {
     _loading = state;
     notifyListeners();
   }
+
+  Future fetchData(String url, {Map<String, dynamic> parameters}) async {
+    final response = await Dio().get(url, queryParameters: parameters);
+
+    return response.data;
+  }
+
+  Future refresh() async => await loadData();
 
   Future loadData();
 
   List get items => _items;
 
+  List get photos => _photos;
+
   dynamic getItem(index) => _items[index];
 
+  String getPhoto(index) => _photos[index];
+
   int get getItemCount => _items.length;
+
+  int get getPhotosCount => _photos.length;
 
   bool get isLoading => _loading;
 

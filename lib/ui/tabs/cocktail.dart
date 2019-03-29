@@ -19,29 +19,38 @@ class CocktailTab extends StatelessWidget {
                 ? LoadingIndicator()
                 : ListView(children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(16),
                       child: Column(children: <Widget>[
                         CocktailsScroll(
                           title: 'Vodka',
                           children: model.vodkas,
                         ),
+                        Separator.cardSpacer(),
                         CocktailsScroll(
                           title: 'Gin',
                           children: model.gins,
                         ),
+                        Separator.cardSpacer(),
                         CocktailsScroll(
                           title: 'Rum',
                           children: model.rums,
                         ),
+                        Separator.cardSpacer(),
                         CocktailsScroll(
                           title: 'Tequila',
                           children: model.tequilas,
                         ),
+                        Separator.cardSpacer(),
                         CocktailsScroll(
                           title: 'Wine',
                           children: model.wines,
                         ),
+                        Separator.cardSpacer(),
                         Card(
+                          elevation: 6,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
                           color: Colors.redAccent,
                           child: Padding(
                             padding: const EdgeInsets.all(16),

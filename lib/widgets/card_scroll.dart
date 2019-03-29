@@ -7,6 +7,9 @@ import '../ui/pages/recipe.dart';
 import 'cache_image.dart';
 import 'separator.dart';
 
+/// CARD SCROLL
+/// This widgets allows users to select recipes or cocktails from a list.
+/// It also presents the first four ones in the main view.
 class CocktailsScroll extends StatelessWidget {
   final String title;
   final List children;
@@ -16,6 +19,8 @@ class CocktailsScroll extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 6,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -110,6 +115,8 @@ class RecipesScroll extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 6,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(

@@ -151,7 +151,7 @@ class RecipePage extends StatelessWidget {
           ),
           Separator.cardSpacer(),
           CardPage(
-            title: 'ALLERGENS',
+            title: 'CAUTIONS',
             body: Column(
               children: _recipe.healths
                   .map((health) => _getHealthLabels(_recipe.healths, health))

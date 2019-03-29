@@ -31,6 +31,7 @@ class RecipesDialog extends StatelessWidget {
               ),
             ),
             title: recipe.name,
+            subtitle: recipe.displayPeople,
             onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(

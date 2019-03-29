@@ -4,6 +4,8 @@ import 'package:scoped_model/scoped_model.dart';
 import '../../models/recipe.dart';
 import '../../models/search.dart';
 import '../../widgets/big_tip.dart';
+import '../../widgets/hero_image.dart';
+import '../../widgets/list_cell.dart';
 import '../../widgets/loading_indicator.dart';
 import '../pages/recipe.dart';
 import '../pages/search_filters.dart';
@@ -93,6 +95,7 @@ class SearchTab extends StatelessWidget {
                             ),
                           ),
                           title: recipe.name,
+                          subtitle: recipe.displayPeople,
                           onTap: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
