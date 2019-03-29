@@ -11,10 +11,11 @@ dependencies:
     sdk: flutter
 
   ## Online
+  flutter_web_browser: ^0.10.0
   http: ^0.12.0+1
 
   ## Offline
-  cached_network_image: ^0.5.1
+  cached_network_image: ^0.7.0
 
   ## Tools
   intl: ^0.15.7

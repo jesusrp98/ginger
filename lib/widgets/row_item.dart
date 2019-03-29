@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:scoped_model/scoped_model.dart';
 
 import '../util/colors.dart';
 
@@ -14,17 +13,26 @@ class RowItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        Expanded(
+          flex: 5,
+          child: Text(
             title,
             style: Theme.of(context).textTheme.subhead,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
           ),
-          description
-        ],
-      ),
+        ),
+        Expanded(
+          flex: 6,
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: description,
+          ),
+        ),
+      ],
     );
   }
 
@@ -42,36 +50,6 @@ class RowItem extends StatelessWidget {
     return RowItem(title, _getIcon(status));
   }
 
-  /// Builds a Text-to-Text widget, but the description widget is clickable
-  /// and opens a dialog
-  factory RowItem.dialogRow({
-    BuildContext context,
-    String title,
-    String description,
-    ScopedModel screen,
-  }) {
-    return RowItem(
-      title,
-      AbsorbPointer(
-        absorbing: description == 'Unknown',
-        child: InkResponse(
-          child: _getText(
-            context,
-            description,
-            description != 'Unknown',
-          ),
-          onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => screen,
-                  fullscreenDialog: true,
-                ),
-              ),
-        ),
-      ),
-    );
-  }
-
   /// Return an icon based on the [status] var
   static Widget _getIcon(bool status) {
     return Icon(
@@ -79,7 +57,7 @@ class RowItem extends StatelessWidget {
           ? Icons.remove_circle
           : (status ? Icons.check_circle : Icons.cancel),
       color: status == null ? nullIcon : (status ? acceptIcon : denyIcon),
-      size: 19.0,
+      size: 19,
     );
   }
 
@@ -88,11 +66,13 @@ class RowItem extends StatelessWidget {
       [bool clickable = false]) {
     return Text(
       description,
-      style: TextStyle(
-        fontSize: 17.0,
-        color: Theme.of(context).textTheme.caption.color,
-        decoration: clickable ? TextDecoration.underline : TextDecoration.none,
-      ),
+      overflow: TextOverflow.ellipsis,
+      textAlign: TextAlign.end,
+      style: Theme.of(context).textTheme.subhead.copyWith(
+            color: Theme.of(context).textTheme.caption.color,
+            decoration:
+                clickable ? TextDecoration.underline : TextDecoration.none,
+          ),
     );
   }
 }
