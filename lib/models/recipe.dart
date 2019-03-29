@@ -7,7 +7,7 @@ class Recipe {
   final String name, photo, url, shareUrl, source;
   final List healths, ingredients, diets;
   final double servs, calories, weight, time;
-  final NutritionalValue sugar, fat, cholesterol, proteins;
+  final List nutritionalValues;
 
   Recipe({
     this.name,
@@ -22,10 +22,7 @@ class Recipe {
     this.calories,
     this.weight,
     this.time,
-    this.sugar,
-    this.fat,
-    this.cholesterol,
-    this.proteins,
+    this.nutritionalValues,
   });
 
   factory Recipe.fromJson(Map<String, dynamic> json) {
@@ -42,10 +39,12 @@ class Recipe {
       calories: json['calories'],
       weight: json['totalWeight'],
       time: json['totalTime'],
-      sugar: setNutritionalValue(json['totalNutrients']['SUGAR']),
-      fat: setNutritionalValue(json['totalNutrients']['FAT']),
-      cholesterol: setNutritionalValue(json['totalNutrients']['CHOLE']),
-      proteins: setNutritionalValue(json['totalNutrients']['PROCNT']),
+      nutritionalValues: [
+        setNutritionalValue(json['totalNutrients']['SUGAR']),
+        setNutritionalValue(json['totalNutrients']['FAT']),
+        setNutritionalValue(json['totalNutrients']['CHOLE']),
+        setNutritionalValue(json['totalNutrients']['PROCNT'])
+      ]..retainWhere((item) => item != null),
     );
   }
 
@@ -63,7 +62,7 @@ class Recipe {
 
   String get getPeople =>
       '${NumberFormat.decimalPattern().format(servs)} ${servs == 1 ? 'person' : 'people'}';
-  
+
   String get displayPeople => 'For $getPeople';
 
   String get getPreparationTime {

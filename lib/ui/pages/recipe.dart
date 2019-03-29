@@ -87,7 +87,7 @@ class RecipePage extends StatelessWidget {
           ),
           Separator.cardSpacer(),
           CardPage(
-            title: 'NUTRITIONAL VALUES',
+            title: 'nutritionalValuesRITIONAL VALUES',
             body: Column(
               children: <Widget>[
                 RowItem.textRow(
@@ -102,37 +102,15 @@ class RecipePage extends StatelessWidget {
                   _recipe.getDiet,
                 ),
                 Separator.divider(),
-                _recipe.sugar != null
-                    ? RowItem.textRow(
-                        context,
-                        _recipe.sugar.getLabel,
-                        _recipe.sugar.getInfo,
-                      )
-                    : Separator.none(),
-                Separator.spacer(),
-                _recipe.fat != null
-                    ? RowItem.textRow(
-                        context,
-                        _recipe.fat.getLabel,
-                        _recipe.fat.getInfo,
-                      )
-                    : Separator.none(),
-                Separator.spacer(),
-                _recipe.cholesterol != null
-                    ? RowItem.textRow(
-                        context,
-                        _recipe.cholesterol.getLabel,
-                        _recipe.cholesterol.getInfo,
-                      )
-                    : Separator.none(),
-                Separator.spacer(),
-                _recipe.proteins != null
-                    ? RowItem.textRow(
-                        context,
-                        _recipe.proteins.getLabel,
-                        _recipe.proteins.getInfo,
-                      )
-                    : Separator.none(),
+                Column(
+                  children: _recipe.nutritionalValues
+                      .map((value) => _getNutritionalValues(
+                            context,
+                            _recipe.nutritionalValues,
+                            value,
+                          ))
+                      .toList(),
+                )
               ],
             ),
           ),
@@ -177,6 +155,17 @@ class RecipePage extends StatelessWidget {
             ),
       ),
       ingredient != ingredients.last ? Separator.spacer() : Separator.none(),
+    ]);
+  }
+
+  Column _getNutritionalValues(
+    BuildContext context,
+    List nutritionalValues,
+    NutritionalValue value,
+  ) {
+    return Column(children: <Widget>[
+      RowItem.textRow(context, value.getLabel, value.getInfo),
+      value != nutritionalValues.last ? Separator.spacer() : Separator.none()
     ]);
   }
 
