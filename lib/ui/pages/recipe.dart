@@ -24,7 +24,7 @@ class RecipePage extends StatelessWidget {
             imageUrl: _recipe.photo,
             subtitle: InkResponse(
               child: Text(
-                'INSTRUCTIONS',
+                'See instructions',
                 style: Theme.of(context).textTheme.subhead.copyWith(
                       color: Theme.of(context).textTheme.caption.color,
                       decoration: TextDecoration.underline,

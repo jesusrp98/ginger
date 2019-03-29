@@ -106,7 +106,7 @@ class NutritionalValue {
     );
   }
 
-  String get getLabel => label ?? 'Unknown';
+  String get getLabel => label;
 
   String get getInfo => '${quantity.round()} $unit';
 }

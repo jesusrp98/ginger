@@ -54,10 +54,10 @@ class CocktailPage extends StatelessWidget {
                 ),
                 Separator.divider(),
                 Column(
-                  children: _cocktail.getIngredients
+                  children: _cocktail.ingredients
                       .map((ingredient) => _getIngredients(
                             context,
-                            _cocktail.getIngredients,
+                            _cocktail.ingredients,
                             ingredient,
                           ))
                       .toList(),

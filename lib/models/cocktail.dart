@@ -5,7 +5,7 @@ import 'query.dart';
 /// This model contais all cocktails the app offers
 /// to its user by default, like vodka or rum drinks.
 class CocktailModel extends QueryModel {
-  List _auxList = List();
+  List _auxList;
 
   @override
   Future loadData() async {
@@ -13,7 +13,7 @@ class CocktailModel extends QueryModel {
     for (String url in Url.sampleCocktails) {
       // Fetch cocktail from the URL
       Map cocktails = await fetchData(url);
-      _auxList.clear();
+      _auxList = List();
 
       // Loads each specific cocktail from its id
       for (Map baseCocktail in cocktails['drinks']) {
@@ -83,19 +83,18 @@ class Cocktail {
           name: json['strIngredient4'],
           measure: json['strMeasure4'],
         ),
-      ],
+      ]..retainWhere(
+          (CocktailIngredient ingredient) => ingredient.name.isNotEmpty,
+        ),
     );
   }
 
-  String get getTag => tag ?? 'Unknown';
+  String get getTag => tag ?? 'Missing tag';
 
   String get getGlass => glassType ?? 'Unknown';
 
   String get getInstructions =>
       instructions ?? 'There are no instructions provided';
-
-  List get getIngredients => ingredients
-    ..removeWhere((CocktailIngredient ingredient) => ingredient.name == null);
 }
 
 class CocktailIngredient {

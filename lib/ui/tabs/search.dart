@@ -7,6 +7,7 @@ import '../../widgets/big_tip.dart';
 import '../../widgets/hero_image.dart';
 import '../../widgets/list_cell.dart';
 import '../../widgets/loading_indicator.dart';
+import '../../widgets/separator.dart';
 import '../pages/recipe.dart';
 import '../pages/search_filters.dart';
 
@@ -83,7 +84,8 @@ class SearchTab extends StatelessWidget {
                   } else {
                     return ListView.separated(
                       itemCount: model.getItemCount,
-                      separatorBuilder: (context, index) => Divider(),
+                      separatorBuilder: (context, index) =>
+                          Separator.divider(height: 0, indent: 88),
                       itemBuilder: (context, index) {
                         final Recipe recipe = model.getItem(index);
                         return ListCell(

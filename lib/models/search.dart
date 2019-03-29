@@ -69,7 +69,7 @@ class SearchModel extends QueryModel {
     clearItems();
 
     items.addAll(
-      result['hints']
+      result['hits']
           .map((recipe) => Recipe.fromJson(recipe['recipe']))
           .toList(),
     );

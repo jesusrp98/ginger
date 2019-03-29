@@ -32,7 +32,7 @@ class CocktailsScroll extends StatelessWidget {
                 Text(
                   title,
                   style: Theme.of(context).textTheme.subhead.copyWith(
-                        color: Theme.of(context).textTheme.caption.color,
+                        color: Theme.of(context).textTheme.subhead.color,
                       ),
                 ),
                 InkResponse(
@@ -128,7 +128,7 @@ class RecipesScroll extends StatelessWidget {
                 Text(
                   title,
                   style: Theme.of(context).textTheme.subhead.copyWith(
-                        color: Theme.of(context).textTheme.caption.color,
+                        color: Theme.of(context).textTheme.subhead.color,
                       ),
                 ),
                 InkResponse(

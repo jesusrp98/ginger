@@ -6,7 +6,7 @@ import 'recipe.dart';
 /// This model contais all recipes the app offers
 /// to its user by default, like balanced or low-fat recipes.
 class HomeModel extends QueryModel {
-  List _auxList = List();
+  List _auxList;
 
   @override
   Future loadData() async {
@@ -14,7 +14,7 @@ class HomeModel extends QueryModel {
     for (String url in Url.sampleRecipes) {
       // Fetch recipes from the URL
       Map recipes = await fetchData(url);
-      _auxList.clear();
+      _auxList = List();
 
       // Adds all fetched recipes to an aux list
       for (Map recipe in recipes['hits'])
