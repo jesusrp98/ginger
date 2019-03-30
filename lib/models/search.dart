@@ -1,6 +1,9 @@
 import '../util/url.dart';
+import 'cocktail.dart';
 import 'query.dart';
 import 'recipe.dart';
+
+enum Mode { RECIPES, COCKTAILS }
 
 final Map<String, dynamic> dietStrings = {
   "diet_type": [
@@ -33,6 +36,10 @@ final Map<String, dynamic> dietStrings = {
 /// It can filter the search result as well.
 class SearchModel extends QueryModel {
   SearchFilter filter = SearchFilter.init();
+
+  Mode mode = Mode.RECIPES;
+  Map result;
+
   bool _success = true;
 
   @override
@@ -41,24 +48,36 @@ class SearchModel extends QueryModel {
   void fetchQuery(String query) async {
     setLoading(true);
 
-    Map result = await fetchData(Url.recipesSearch, parameters: {
-      'q': query,
-      'app_id': '541602a7',
-      'app_key': 'dc6e03b02796720e83b437f67e6074db',
-      'calories': filter.getCalories,
-      'ingr': filter.ingredients,
-      'diet': filter.dietType,
-      'healt': filter.dietProperties,
-      'time': filter.time
-    });
+    if (mode == Mode.RECIPES) {
+      result = await fetchData(Url.recipesSearch, parameters: {
+        'q': query,
+        'app_id': '541602a7',
+        'app_key': 'dc6e03b02796720e83b437f67e6074db',
+        'calories': filter.getCalories,
+        'ingr': filter.ingredients,
+        'diet': filter.dietType,
+        'healt': filter.dietProperties,
+        'time': filter.time
+      });
 
-    clearItems();
+      clearItems();
 
-    items.addAll(
-      result['hits']
-          .map((recipe) => Recipe.fromJson(recipe['recipe']))
-          .toList(),
-    );
+      items.addAll(
+        result['hits']
+            .map((recipe) => Recipe.fromJson(recipe['recipe']))
+            .toList(),
+      );
+    } else {
+      result = await fetchData(Url.cocktailsSearch, parameters: {'s': query});
+
+      clearItems();
+
+      items.addAll(
+        result['drinks']
+            .map((cocktail) => Cocktail.fromJson(cocktail))
+            .toList(),
+      );
+    }
 
     _success = items.isNotEmpty;
 
@@ -66,6 +85,11 @@ class SearchModel extends QueryModel {
   }
 
   bool get onSuccess => _success;
+
+  toggleMode() {
+    mode = mode == Mode.RECIPES ? Mode.COCKTAILS : Mode.RECIPES;
+    notifyListeners();
+  }
 
   void setFilterCalories(List<int> calories) {
     filter.totalCalories = calories;

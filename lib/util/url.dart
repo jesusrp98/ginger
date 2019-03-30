@@ -1,8 +1,14 @@
+/// URL FILE
+/// It has all urls used in the app as static const strings.
 class Url {
-  static const String recipesSearch = 'https://api.edamam.com/search';
-
+  // Fetch cocktails by ID
   static const String cocktailBaseUrl =
       'https://www.thecocktaildb.com/api/json/v1/1/lookup.php';
+
+  // This URLs are used in the Search tab
+  static const String recipesSearch = 'https://api.edamam.com/search';
+  static const String cocktailsSearch =
+      'https://www.thecocktaildb.com/api/json/v1/1/search.php';
 
   // This URL presents users with default recipes & cocktails selected by us
   static const List<String> sampleCocktails = [

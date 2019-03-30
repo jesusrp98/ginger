@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'separator.dart';
 
+/// BIG TIP WIDGET
+/// This widget shows to the user basic information,
+/// using a medium sized icon and a simple text.
 class BigTip extends StatelessWidget {
   final IconData icon;
   final String message;

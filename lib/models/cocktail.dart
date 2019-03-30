@@ -1,4 +1,5 @@
 import '../util/url.dart';
+import 'item_ginger.dart';
 import 'query.dart';
 
 /// COCKTAIL MODEL
@@ -43,20 +44,20 @@ class CocktailModel extends QueryModel {
   List get wines => getItem(4);
 }
 
-class Cocktail {
-  final String name, tag, glassType, instructions, photo;
+class Cocktail extends GingerItem {
+  final String tag, glassType, instructions;
   final List<CocktailIngredient> ingredients;
   final bool isAlcoholic;
 
   Cocktail({
-    this.name,
+    name,
     this.tag,
     this.glassType,
     this.instructions,
-    this.photo,
+    photo,
     this.ingredients,
     this.isAlcoholic,
-  });
+  }) : super(name: name, photo: photo);
 
   factory Cocktail.fromJson(Map<String, dynamic> json) {
     return Cocktail(
@@ -88,6 +89,8 @@ class Cocktail {
         ),
     );
   }
+
+  String get subtitle => getGlass;
 
   String get getTag => tag ?? 'Missing tag';
 

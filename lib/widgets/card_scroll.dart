@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../ui/pages/cocktail.dart';
-import '../ui/pages/dialog_cocktails.dart';
-import '../ui/pages/dialog_recipes.dart';
+import '../ui/pages/dialog_details.dart';
 import '../ui/pages/recipe.dart';
 import 'cache_image.dart';
 import 'separator.dart';
@@ -13,13 +12,11 @@ import 'separator.dart';
 class CardScroll extends StatelessWidget {
   final String title;
   final List children, displayChildren;
-  final VoidCallback onMoreTap;
 
   CardScroll({
     this.title,
     this.children,
     this.displayChildren,
-    this.onMoreTap,
   });
 
   @override
@@ -48,7 +45,16 @@ class CardScroll extends StatelessWidget {
                           color: Theme.of(context).accentColor,
                         ),
                   ),
-                  onTap: onMoreTap,
+                  onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => DetailsDialog(
+                                title: title,
+                                recipes: children,
+                              ),
+                          fullscreenDialog: true,
+                        ),
+                      ),
                 )
               ],
             ),
@@ -81,16 +87,6 @@ class CardScroll extends StatelessWidget {
                     ),
               ))
           .toList(),
-      onMoreTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) => RecipesDialog(
-                    title: title,
-                    recipes: children,
-                  ),
-              fullscreenDialog: true,
-            ),
-          ),
     );
   }
   factory CardScroll.cocktail({
@@ -111,16 +107,6 @@ class CardScroll extends StatelessWidget {
                     ),
               ))
           .toList(),
-      onMoreTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) => CocktailsDialog(
-                    title: title,
-                    cocktails: children,
-                  ),
-              fullscreenDialog: true,
-            ),
-          ),
     );
   }
 }

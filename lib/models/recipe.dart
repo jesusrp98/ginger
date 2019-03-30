@@ -1,17 +1,19 @@
 import 'package:intl/intl.dart';
 
+import 'item_ginger.dart';
+
 /// RECIPE MODEL
 /// This model holds all info about a specific model.
 /// It includes name, image, nutritional values...
-class Recipe {
-  final String name, photo, url, shareUrl, source;
+class Recipe extends GingerItem {
+  final String url, shareUrl, source;
   final List healths, ingredients, diets;
   final double servs, calories, weight, time;
   final List nutritionalValues;
 
   Recipe({
-    this.name,
-    this.photo,
+    name,
+    photo,
     this.url,
     this.shareUrl,
     this.source,
@@ -23,7 +25,7 @@ class Recipe {
     this.weight,
     this.time,
     this.nutritionalValues,
-  });
+  }) : super(name: name, photo: photo);
 
   factory Recipe.fromJson(Map<String, dynamic> json) {
     return Recipe(
@@ -58,12 +60,12 @@ class Recipe {
     }
   }
 
+  String get subtitle => 'For $getPeople';
+
   String get getCalories => '${calories.round()} kcal';
 
   String get getPeople =>
       '${NumberFormat.decimalPattern().format(servs)} ${servs == 1 ? 'person' : 'people'}';
-
-  String get displayPeople => 'For $getPeople';
 
   String get getPreparationTime {
     if (time == 0)
