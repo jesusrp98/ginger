@@ -24,4 +24,16 @@ class Url {
     'https://api.edamam.com/search?q=legumes&app_id=541602a7&app_key=dc6e03b02796720e83b437f67e6074db&diet=low-fat',
     'https://api.edamam.com/search?q=salad&app_id=541602a7&app_key=dc6e03b02796720e83b437f67e6074db&diet=low-carb',
   ];
+
+  // About page
+  static const String authorStore =
+      'https://play.google.com/store/apps/developer?id=Jes%C3%BAs+Rodr%C3%ADguez+P%C3%A9rez';
+  static const String gingerStore =
+      'https://play.google.com/store/apps/details?id=com.chechu.ginger';
+  static const String gingerGithub = 'https://github.com/jesusrp98/ginger';
+  static const Map<String, String> email = {
+    'subject': 'About Project: Ginger',
+    'address': 'jesusillorp98@gmail.com',
+  };
+  static const String flutterPage = 'https://flutter.dev/';
 }

@@ -11,6 +11,7 @@ dependencies:
     sdk: flutter
 
   ## Online
+  flutter_mailer: ^0.4.0+1
   flutter_web_browser: ^0.10.0
   dio: ^2.1.0
 
@@ -26,17 +27,9 @@ dependencies:
 
 flutter:
   fonts:
-    - family: RobotoMono
-      fonts:
-        - asset: assets/fonts/RobotoMono-Bold.ttf
-        - asset: assets/fonts/RobotoMono-Italic.ttf
-        - asset: assets/fonts/RobotoMono-Regular.ttf
-          weight: 700
     - family: ProductSans
       fonts:
         - asset: assets/fonts/ProductSans-Bold.ttf
-        - asset: assets/fonts/ProductSans-Italic.ttf
         - asset: assets/fonts/ProductSans-Regular.ttf
-          weight: 700
-
+      
   uses-material-design: true

@@ -120,8 +120,8 @@ class ScrollItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 72,
-      width: 72,
+      height: 64,
+      width: 64,
       child: InkWell(
         child: ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(8)),

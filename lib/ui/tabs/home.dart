@@ -14,6 +14,13 @@ class HomeTab extends StatelessWidget {
             appBar: AppBar(
               title: const Text('Recipe recommendations'),
               centerTitle: true,
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.info_outline),
+                  tooltip: 'About',
+                  onPressed: () => Navigator.pushNamed(context, '/about'),
+                )
+              ],
             ),
             body: model.isLoading
                 ? LoadingIndicator()
