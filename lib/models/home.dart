@@ -26,6 +26,7 @@ class HomeModel extends QueryModel {
     setLoading(false);
   }
 
+  // Getters which retrieves a specific recipes list
   List get balanced => getItem(0);
 
   List get proteins => getItem(1);

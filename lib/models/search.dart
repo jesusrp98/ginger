@@ -3,8 +3,10 @@ import 'cocktail.dart';
 import 'query.dart';
 import 'recipe.dart';
 
+// Possible search modes
 enum Mode { RECIPES, COCKTAILS }
 
+// Lists with possible health & diet labels
 final Map<String, dynamic> dietStrings = {
   "diet_type": [
     "balanced",
@@ -38,7 +40,7 @@ class SearchModel extends QueryModel {
   SearchFilter filter = SearchFilter.init();
 
   Mode mode = Mode.RECIPES;
-  Map result;
+  Map _result;
 
   bool _success = true;
 
@@ -46,10 +48,13 @@ class SearchModel extends QueryModel {
   Future loadData() async => setLoading(false);
 
   void fetchQuery(String query) async {
+    // Starts loading data
     setLoading(true);
 
+    // Checks which search mode is enabled
     if (mode == Mode.RECIPES) {
-      result = await fetchData(Url.recipesSearch, parameters: {
+      // Model fetches the data
+      _result = await fetchData(Url.recipesSearch, parameters: {
         'q': query,
         'app_id': '541602a7',
         'app_key': 'dc6e03b02796720e83b437f67e6074db',
@@ -60,27 +65,28 @@ class SearchModel extends QueryModel {
         'time': filter.time
       });
 
+      // Then cleans all items and adds the new ones
       clearItems();
-
       items.addAll(
-        result['hits']
+        _result['hits']
             .map((recipe) => Recipe.fromJson(recipe['recipe']))
             .toList(),
       );
     } else {
-      result = await fetchData(Url.cocktailsSearch, parameters: {'s': query});
+      // Model fetches the data
+      _result = await fetchData(Url.cocktailsSearch, parameters: {'s': query});
 
+      // Then cleans all items and adds the new ones
       clearItems();
-
       items.addAll(
-        result['drinks']
+        _result['drinks']
             .map((cocktail) => Cocktail.fromJson(cocktail))
             .toList(),
       );
     }
 
+    // Finishes loading data
     _success = items.isNotEmpty;
-
     setLoading(false);
   }
 
@@ -91,6 +97,7 @@ class SearchModel extends QueryModel {
     notifyListeners();
   }
 
+  // Setters which update filter options
   void setFilterCalories(List<int> calories) {
     filter.totalCalories = calories;
     notifyListeners();
@@ -117,6 +124,9 @@ class SearchModel extends QueryModel {
   }
 }
 
+/// SEARCH FILTER CLASS
+/// This class is where the model storages 
+/// filter details about recipes.
 class SearchFilter {
   List<int> totalCalories;
   String dietType;
