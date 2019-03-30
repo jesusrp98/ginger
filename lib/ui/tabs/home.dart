@@ -12,7 +12,7 @@ class HomeTab extends StatelessWidget {
     return ScopedModelDescendant<HomeModel>(
       builder: (context, child, model) => Scaffold(
             appBar: AppBar(
-              title: const Text('Project: Ginger'),
+              title: const Text('Recipe recommendations'),
               centerTitle: true,
             ),
             body: model.isLoading
@@ -58,14 +58,14 @@ class HomeTab extends StatelessWidget {
                         Separator.cardSpacer(),
                         CardScroll.recipe(
                           context: context,
-                          title: 'Low Fat',
-                          children: model.fat,
+                          title: 'Low Carb',
+                          children: model.carb,
                         ),
                         Separator.cardSpacer(),
                         CardScroll.recipe(
                           context: context,
-                          title: 'Low Carb',
-                          children: model.carb,
+                          title: 'Low Fat',
+                          children: model.fat,
                         ),
                       ]),
                     )

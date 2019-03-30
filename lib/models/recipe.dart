@@ -66,7 +66,9 @@ class Recipe {
   String get displayPeople => 'For $getPeople';
 
   String get getPreparationTime {
-    if (time < 60)
+    if (time == 0)
+      return 'Not specified';
+    else if (time < 60)
       return '${NumberFormat.decimalPattern().format(time)} min';
     else
       return '${NumberFormat.decimalPattern().format(time / 60)} h';

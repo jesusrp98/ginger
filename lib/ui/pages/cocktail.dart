@@ -39,7 +39,7 @@ class CocktailPage extends StatelessWidget {
           ),
           Separator.cardSpacer(),
           CardPage(
-            title: 'INFORMATION',
+            title: 'DETAILS',
             body: Column(
               children: <Widget>[
                 RowItem.textRow(

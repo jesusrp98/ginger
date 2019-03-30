@@ -74,7 +74,6 @@ class CardScroll extends StatelessWidget {
       displayChildren: children
           .sublist(0, 4)
           .map((recipe) => ScrollItem(
-                title: recipe.name,
                 url: recipe.photo,
                 onTap: () => Navigator.push(
                       context,
@@ -105,7 +104,6 @@ class CardScroll extends StatelessWidget {
       displayChildren: children
           .sublist(0, 4)
           .map((cocktail) => ScrollItem(
-                title: cocktail.name,
                 url: cocktail.photo,
                 onTap: () => Navigator.push(
                       context,
@@ -128,41 +126,21 @@ class CardScroll extends StatelessWidget {
 }
 
 class ScrollItem extends StatelessWidget {
-  final String title, url;
+  final String url;
   final VoidCallback onTap;
 
-  ScrollItem({
-    this.title,
-    this.url,
-    this.onTap,
-  });
+  ScrollItem({this.url, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 91,
+      height: 72,
       width: 72,
       child: InkWell(
-        child: Column(children: <Widget>[
-          Separator.spacer(height: 8),
-          ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(8)),
-            child: SizedBox(
-              width: 56.0,
-              height: 56.0,
-              child: CacheImage(url),
-            ),
-          ),
-          Separator.spacer(height: 8),
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.subhead.copyWith(
-                  color: Theme.of(context).textTheme.caption.color,
-                ),
-          )
-        ]),
+        child: ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+          child: CacheImage(url),
+        ),
         onTap: onTap,
       ),
     );

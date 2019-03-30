@@ -12,7 +12,7 @@ class CocktailTab extends StatelessWidget {
     return ScopedModelDescendant<CocktailModel>(
       builder: (context, child, model) => Scaffold(
             appBar: AppBar(
-              title: const Text('Cocktails catalogue'),
+              title: const Text('Cocktail recommendations'),
               centerTitle: true,
             ),
             body: model.isLoading
@@ -44,10 +44,26 @@ class CocktailTab extends StatelessWidget {
                           ],
                         ),
                         Separator.divider(),
-                        CardScroll.cocktail(
-                          context: context,
-                          title: 'Vodka',
-                          children: model.vodkas,
+                        Card(
+                          elevation: 6,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          color: Colors.redAccent,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Row(children: <Widget>[
+                              Icon(Icons.warning, size: 56),
+                              Separator.spacer(width: 14),
+                              Expanded(
+                                child: Text(
+                                  'Remember not to drink if you\'re going to drive!',
+                                  textAlign: TextAlign.justify,
+                                  style: Theme.of(context).textTheme.title,
+                                ),
+                              )
+                            ]),
+                          ),
                         ),
                         Separator.cardSpacer(),
                         CardScroll.cocktail(
@@ -70,30 +86,14 @@ class CocktailTab extends StatelessWidget {
                         Separator.cardSpacer(),
                         CardScroll.cocktail(
                           context: context,
-                          title: 'Wine',
-                          children: model.wines,
+                          title: 'Vodka',
+                          children: model.vodkas,
                         ),
                         Separator.cardSpacer(),
-                        Card(
-                          elevation: 6,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          color: Colors.redAccent,
-                          child: Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: Row(children: <Widget>[
-                              Icon(Icons.warning, size: 56),
-                              Separator.spacer(width: 14),
-                              Expanded(
-                                child: Text(
-                                  'Remember not to drink if you\'re going to drive!',
-                                  textAlign: TextAlign.justify,
-                                  style: Theme.of(context).textTheme.title,
-                                ),
-                              )
-                            ]),
-                          ),
+                        CardScroll.cocktail(
+                          context: context,
+                          title: 'Wine',
+                          children: model.wines,
                         ),
                       ]),
                     )

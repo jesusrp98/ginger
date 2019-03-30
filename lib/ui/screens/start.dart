@@ -23,9 +23,9 @@ class _StartScreenState extends State<StartScreen> {
 
   static final List<QueryModel> _modelTab = [
     HomeModel(),
-    IntelligentModel(),
-    SearchModel(),
     CocktailModel(),
+    SearchModel(),
+    IntelligentModel(),
     ProfileModel(),
   ];
 
@@ -34,17 +34,17 @@ class _StartScreenState extends State<StartScreen> {
       model: _modelTab[0],
       child: HomeTab(),
     ),
-    ScopedModel<IntelligentModel>(
+    ScopedModel<CocktailModel>(
       model: _modelTab[1],
-      child: IntelligentTab(),
+      child: CocktailTab(),
     ),
     ScopedModel<SearchModel>(
       model: _modelTab[2],
       child: SearchTab(),
     ),
-    ScopedModel<CocktailModel>(
+    ScopedModel<IntelligentModel>(
       model: _modelTab[3],
-      child: CocktailTab(),
+      child: IntelligentTab(),
     ),
     ScopedModel<ProfileModel>(
       model: _modelTab[4],
@@ -73,16 +73,16 @@ class _StartScreenState extends State<StartScreen> {
             icon: const Icon(Icons.home),
           ),
           BottomNavigationBarItem(
-            title: const Text('Intelligent'),
-            icon: const Icon(Icons.star),
+            title: const Text('Cocktails'),
+            icon: const Icon(Icons.local_bar),
           ),
           BottomNavigationBarItem(
             title: const Text('Search'),
             icon: const Icon(Icons.search),
           ),
           BottomNavigationBarItem(
-            title: const Text('Cocktails'),
-            icon: const Icon(Icons.local_bar),
+            title: const Text('Stats'),
+            icon: const Icon(Icons.star),
           ),
           BottomNavigationBarItem(
             title: const Text('Profile'),
