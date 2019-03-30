@@ -8,6 +8,9 @@ import '../../widgets/separator.dart';
 import 'cocktail.dart';
 import 'recipe.dart';
 
+/// COCKTAILS AND RECIPES 'MORE' VIEW
+/// It will let you take a look for further cocktails or recipes
+/// of a category by clicking 'More'
 class DetailsDialog extends StatelessWidget {
   final String title;
   final List recipes;

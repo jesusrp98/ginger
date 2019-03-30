@@ -5,6 +5,8 @@ import 'package:scoped_model/scoped_model.dart';
 import '../../models/search.dart';
 import '../../widgets/separator.dart';
 
+/// SEARCH PAGE VIEW
+/// It shows different filters to apply on a search
 class SearchFiltersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

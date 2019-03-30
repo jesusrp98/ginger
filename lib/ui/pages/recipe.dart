@@ -8,6 +8,9 @@ import '../../widgets/head_card_page.dart';
 import '../../widgets/row_item.dart';
 import '../../widgets/separator.dart';
 
+/// RECIPE PAGE VIEW
+/// It shows detailed information of recipes like
+/// instructions, ingredients, time of preparation and cautions (allergies)
 class RecipePage extends StatelessWidget {
   final Recipe _recipe;
 

@@ -7,6 +7,9 @@ import '../../widgets/head_card_page.dart';
 import '../../widgets/row_item.dart';
 import '../../widgets/separator.dart';
 
+/// COCKTAIL PAGE VIEW
+/// It shows detailed information of cocktails like
+/// instructions, ingredients and measure
 class CocktailPage extends StatelessWidget {
   final Cocktail _cocktail;
 
