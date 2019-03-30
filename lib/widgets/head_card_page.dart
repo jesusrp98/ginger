@@ -4,15 +4,17 @@ import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'hero_image.dart';
 import 'separator.dart';
 
+/// HEAD CARD PAGE WIDGET
+/// Widget used as page head in details pages, like 'Recipe Page' or 'Cocktail Page'.
 class HeadCardPage extends StatelessWidget {
   final String title, imageUrl;
   final Widget subtitle, body;
 
   HeadCardPage({
-    this.title,
-    this.imageUrl,
-    this.subtitle,
-    this.body,
+    @required this.title,
+    @required this.imageUrl,
+    @required this.subtitle,
+    @required this.body,
   });
 
   @override

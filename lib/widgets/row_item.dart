@@ -62,11 +62,15 @@ class RowItem extends StatelessWidget {
   }
 
   /// Returns a text description
-  static Widget _getText(BuildContext context, String description,
-      [bool clickable = false]) {
+  static Widget _getText(
+    BuildContext context,
+    String description, [
+    bool clickable = false,
+  ]) {
     return Text(
       description,
       overflow: TextOverflow.ellipsis,
+      maxLines: 1,
       textAlign: TextAlign.end,
       style: Theme.of(context).textTheme.subhead.copyWith(
             color: Theme.of(context).textTheme.caption.color,
