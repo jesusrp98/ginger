@@ -16,7 +16,9 @@ This project has participated in the #13 [Concurso Universitario de Software Lib
 
 ## Features
 * **Food & cocktail recommendations**: provides specific food & cocktails based on user habits.
-* **Recipe search functionality**: ability to search for recipes, based on specific filters.
+* **Recipe search functionality**: ability to search for recipes, based on specific filters
+
+### Future features
 * **User stadistics**: user can track total ingested daily calories.
 * **User data on the cloud**: uses user's Google account to synchronize his/her data between devices.
 
