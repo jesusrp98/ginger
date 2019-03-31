@@ -19,10 +19,10 @@ class Url {
     'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Wine'
   ];
   static const List<String> sampleRecipes = [
-    'https://api.edamam.com/search?q=tomato&app_id=541602a7&app_key=dc6e03b02796720e83b437f67e6074db&diet=balanced',
-    'https://api.edamam.com/search?q=chicken&app_id=541602a7&app_key=dc6e03b02796720e83b437f67e6074db%20&diet=high-protein',
-    'https://api.edamam.com/search?q=legumes&app_id=541602a7&app_key=dc6e03b02796720e83b437f67e6074db&diet=low-fat',
-    'https://api.edamam.com/search?q=salad&app_id=541602a7&app_key=dc6e03b02796720e83b437f67e6074db&diet=low-carb',
+    'https://api.edamam.com/search?q=tomato&app_id=79c94935&app_key=8f8b4441a7755a5a34b1b8ef72550062&diet=balanced',
+    'https://api.edamam.com/search?q=chicken&app_id=79c94935&app_key=8f8b4441a7755a5a34b1b8ef72550062%20&diet=high-protein',
+    'https://api.edamam.com/search?q=legumes&app_id=79c94935&app_key=8f8b4441a7755a5a34b1b8ef72550062&diet=low-fat',
+    'https://api.edamam.com/search?q=salad&app_id=79c94935&app_key=8f8b4441a7755a5a34b1b8ef72550062&diet=low-carb',
   ];
 
   // About page

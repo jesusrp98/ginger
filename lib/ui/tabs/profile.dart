@@ -4,6 +4,10 @@ import 'package:scoped_model/scoped_model.dart';
 import '../../models/profile.dart';
 import '../../widgets/big_tip.dart';
 
+/// PROFILE TAB VIEW
+/// It will show Google account profile
+/// with different information about the
+/// preferences of the user
 class ProfileTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

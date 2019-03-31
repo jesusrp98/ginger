@@ -13,6 +13,9 @@ import '../pages/cocktail.dart';
 import '../pages/recipe.dart';
 import '../pages/search_filters.dart';
 
+/// SEARCH TAB VIEW
+/// It lets you look for recipes or cocktails
+/// by different parameters
 class SearchTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

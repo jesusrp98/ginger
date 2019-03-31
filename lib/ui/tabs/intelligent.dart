@@ -4,6 +4,9 @@ import 'package:scoped_model/scoped_model.dart';
 import '../../models/intelligent.dart';
 import '../../widgets/big_tip.dart';
 
+/// INTELLIGENT TAB VIEW
+/// It will show some charts and information
+/// about user habit of eating
 class IntelligentTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

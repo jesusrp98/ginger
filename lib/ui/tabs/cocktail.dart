@@ -6,6 +6,9 @@ import '../../widgets/card_scroll.dart';
 import '../../widgets/loading_indicator.dart';
 import '../../widgets/separator.dart';
 
+/// COCKTAIL TAB VIEW
+/// It shows different kinds of cocktails
+/// depending on the alcohol used
 class CocktailTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

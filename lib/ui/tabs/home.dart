@@ -6,6 +6,9 @@ import '../../widgets/card_scroll.dart';
 import '../../widgets/loading_indicator.dart';
 import '../../widgets/separator.dart';
 
+/// HOME/RECIPE TAB VIEW
+/// It shows different kinds of recipes
+/// depending on the diet
 class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
