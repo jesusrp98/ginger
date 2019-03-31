@@ -1,10 +1,10 @@
 # Project: Ginger
-Project: Cherry is an open-source app, built using Flutter, which offers users food & cocktails recipes.
+Project: Ginger is an open-source app, built using Flutter, which offers users food & cocktails recipes.
 
 ### About the project 
 The only purpose of this project is to start developing native mobile apps, using the Flutter SDK. This development kit allows us to deploy it to Android & iOS with ease. The app has been developed to be light-weight, fast and easy to use. 
 
-With Project: Ginger, we're aiming to provide people with healthier food recipes, and make them aware of how many calories they've consumed over a certain period. When time's right, the app can also provide fun & tasty cocktails.
+With Project: Ginger, we're aiming to provide people with healthier food recipes, and make them aware of how many calories they've consumed over a certain period of time. When time's right, the app can also provide fun & tasty cocktails.
 
 This project has participated in the #13 [Concurso Universitario de Software Libre](https://www.concursosoftwarelibre.org/1819/).
 
