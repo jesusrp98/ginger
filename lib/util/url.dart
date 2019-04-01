@@ -29,7 +29,7 @@ class Url {
   static const String authorStore =
       'https://play.google.com/store/apps/developer?id=Jes%C3%BAs+Rodr%C3%ADguez+P%C3%A9rez';
   static const String gingerStore =
-      'https://play.google.com/store/apps/details?id=com.chechu.ginger';
+      'https://play.google.com/store/apps/details?id=com.chechu.ginger00';
   static const String gingerGithub = 'https://github.com/jesusrp98/ginger';
   static const Map<String, String> email = {
     'subject': 'About Project: Ginger',
