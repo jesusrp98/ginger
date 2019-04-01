@@ -1,3 +1,5 @@
+import 'keys.dart';
+
 /// URL FILE
 /// It has all urls used in the app as static const strings.
 class Url {
@@ -18,11 +20,11 @@ class Url {
     'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Tequila',
     'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Wine'
   ];
-  static const List<String> sampleRecipes = [
-    'https://api.edamam.com/search?q=tomato&app_id=79c94935&app_key=8f8b4441a7755a5a34b1b8ef72550062&diet=balanced',
-    'https://api.edamam.com/search?q=chicken&app_id=79c94935&app_key=8f8b4441a7755a5a34b1b8ef72550062%20&diet=high-protein',
-    'https://api.edamam.com/search?q=legumes&app_id=79c94935&app_key=8f8b4441a7755a5a34b1b8ef72550062&diet=low-fat',
-    'https://api.edamam.com/search?q=salad&app_id=79c94935&app_key=8f8b4441a7755a5a34b1b8ef72550062&diet=low-carb',
+  static List<String> sampleRecipes = [
+    'https://api.edamam.com/search?q=tomato&app_id=${Keys.appId}&app_key=${Keys.appKey}&diet=balanced',
+    'https://api.edamam.com/search?q=chicken&app_id=${Keys.appId}&app_key=${Keys.appKey}%20&diet=high-protein',
+    'https://api.edamam.com/search?q=legumes&app_id=${Keys.appId}&app_key=${Keys.appKey}&diet=low-fat',
+    'https://api.edamam.com/search?q=salad&app_id=${Keys.appId}&app_key=${Keys.appKey}&diet=low-carb',
   ];
 
   // About page

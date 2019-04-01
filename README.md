@@ -1,4 +1,8 @@
 # Project: Ginger
+[![License](https://img.shields.io/github/license/jesusrp98/ginger.svg?style=for-the-badge)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![Stars](https://img.shields.io/github/stars/jesusrp98/ginger.svg?style=for-the-badge)](https://github.com/jesusrp98/spacex-go/stargazers)
+[![Download app](https://img.shields.io/badge/Google-PlayStore-green.svg?style=for-the-badge)](https://play.google.com/store/apps/details?id=com.chechu.ginger00)
+
 Project: Ginger is an open-source app, built using Flutter, which offers users food & cocktails recipes.
 
 ### About the project 

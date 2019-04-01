@@ -1,3 +1,4 @@
+import '../util/keys.dart';
 import '../util/url.dart';
 import 'cocktail.dart';
 import 'query.dart';
@@ -56,8 +57,8 @@ class SearchModel extends QueryModel {
       // Model fetches the data
       _result = await fetchData(Url.recipesSearch, parameters: {
         'q': query,
-        'app_id': '541602a7',
-        'app_key': 'dc6e03b02796720e83b437f67e6074db',
+        'app_id': Keys.appId,
+        'app_key': Keys.appKey,
         'calories': filter.getCalories,
         'ingr': filter.ingredients,
         'diet': filter.dietType,
